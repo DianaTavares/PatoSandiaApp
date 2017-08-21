@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'user/show/creacionejercicios', to: 'users#creacion_de_ejercicios', as: creacion_de_ejercicios
+
   get 'sessions/new'
 
   get 'user/new'

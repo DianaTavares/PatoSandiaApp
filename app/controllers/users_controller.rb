@@ -3,12 +3,17 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
+  def creacion_de_ejercicios
+
+  end
+
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    p "sho2" * 50
   end
 
   def new
