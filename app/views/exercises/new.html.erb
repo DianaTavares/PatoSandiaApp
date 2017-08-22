@@ -1,0 +1,23 @@
+<h1>Creación de Ejercicios</h1>
+<div class="row botones">
+  <div class="col-md-2">
+    <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
+  </div>
+  <div class="col-md-2">
+    <button id="btn_text" class="btn btn-info">Agregar texto</button>
+  </div>
+</div>
+<br>
+<%= form_for :exersice do |f| %>
+  <div id="work_area">
+    <div class="makeMeDraggable2">
+      <%= f.label :name,'I1' %>
+      <%= f.text_field :name, class: 'inputdragable' %>
+    </div>
+    <div class="makeMeDraggable2">
+      <%= f.label :name, 'I2' %>
+      <%= f.text_field :name, class: 'inputdragable' %>
+    </div>
+  </div>
+  <%= f.submit "Terminar Ejericio", class: "btn btn-primary" %>
+<% end %>
