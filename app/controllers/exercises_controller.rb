@@ -17,10 +17,13 @@ class ExercisesController < ApplicationController
   # end
 
   def new
-
+    p "." * 50
+    p "new ExercisesController"
+    p params
+    p "." * 50
   end
 
-  def creacion_de_ejercicios
-
-  end
+  # def creacion_de_ejercicios
+  #
+  # end
 end

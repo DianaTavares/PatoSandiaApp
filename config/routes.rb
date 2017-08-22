@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   # get 'exercises/new_exercises', to: 'exercises#new_exercises' #, as: creacion_de_ejercicios
 
   # get 'exercises/new', to: 'users#creacion_de_ejercicios' #, as: user_show_creacion_de_ejercicios
-
+  # ruta para enviar los inputs creados del ejercio
+  post '/exercises/new'
+  # ruta para nuevo ejercicio
   get 'exercises/new'
 
   get 'sessions/new'

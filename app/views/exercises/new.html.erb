@@ -11,16 +11,13 @@
   </div>
 </div>
 <br>
-<%= form_for :exersice do |f| %>
+<%= form_for :exercise do |f| %>
   <div id="work_area">
-    <div class="makeMeDraggable2">
+    <div class="draggableResizable">
       <%= f.label :name,'I1' %>
-      <%= f.text_field :name, class: 'inputdragable' %>
+      <%= f.text_field :name  %>
     </div>
-    <div class="makeMeDraggable2">
-      <%= f.label :name, 'I2' %>
-      <%= f.text_field :name, class: 'inputdragable' %>
-    </div>
+
   </div>
   <%= f.submit "Terminar Ejericio", class: "btn btn-primary" %>
 <% end %>
