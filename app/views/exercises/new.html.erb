@@ -13,10 +13,11 @@
 <br>
 <%= form_for :exercise do |f| %>
   <div id="work_area">
-    <div class="draggableResizable">
-      <%= f.label :name,'I1' %>
-      <%= f.text_field :name  %>
-    </div>
+    <!-- no borrar, util para ver el formato de cada input en los form_for -->
+    <!-- <div class="draggableResizable">
+      %= f.label :input,'I1' %
+      %= f.text_field :input  %
+    </div> -->
 
   </div>
   <%= f.submit "Terminar Ejericio", class: "btn btn-primary" %>

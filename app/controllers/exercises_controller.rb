@@ -19,7 +19,9 @@ class ExercisesController < ApplicationController
   def new
     p "." * 50
     p "new ExercisesController"
-    p params
+    if params[:authenticity_token]
+      p params
+    end
     p "." * 50
   end
 
