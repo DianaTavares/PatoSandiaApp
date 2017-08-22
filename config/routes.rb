@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  post 'exercises/canva', to: 'exercises#canva'
-  get 'exercises/canva', to: 'exercises#canva'
-  get 'exercises/new_exercises', to: 'exercises#new_exercises' #, as: creacion_de_ejercicios
+  # post 'exercises/canva', to: 'exercises#canva'
+  # get 'exercises/canva', to: 'exercises#canva'
+  # get 'exercises/new_exercises', to: 'exercises#new_exercises' #, as: creacion_de_ejercicios
+
+  # get 'exercises/new', to: 'users#creacion_de_ejercicios' #, as: user_show_creacion_de_ejercicios
 
   get 'exercises/new'
 
-   get 'user/show/creacionejercicios', to: 'users#creacion_de_ejercicios' #, as: creacion_de_ejercicios
   get 'sessions/new'
   get 'user/new'
   root 'static_pages#home'

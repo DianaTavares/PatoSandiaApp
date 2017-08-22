@@ -1,6 +1,7 @@
-$(document).ready(function(){
-  console.log("prueb");
-    $("#btn_inputs").click(function(){
+$(document).on('click','#btn_inputs', function() {
+
+  console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
+    // $("#btn_inputs").click(function(){
       //create an element
       var $element = $('<div class="draggableResizable" />');
 
@@ -9,7 +10,5 @@ $(document).ready(function(){
 
       //make it "draggable" and "resizable"
       $element.draggable().resizable();
-    });
-
-
+    // });
 });
