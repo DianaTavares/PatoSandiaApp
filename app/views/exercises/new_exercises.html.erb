@@ -1,12 +1,5 @@
-      <h2>creacion de ejercios html erb</h2>
-
-
-        <div id="makeMeDraggable">
-          <input type="text" id="input" draggable="true" ondragstart="drag(event)" />
-        </div>
-
-
-        <script type="text/javascript">
-                // console.log("envevido");
-                // $('#makeMeDraggable').draggable();
-        </script>
+<div class="container">
+  <h1>new exercises html</h1>
+  <%= link_to "Add exercise", exercises_canva_path, remote: true, class: "btn btn-danger" %>
+  <div id="canva-modal" class="modal fade">canva</div>  
+</div>
