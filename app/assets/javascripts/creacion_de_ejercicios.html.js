@@ -9,6 +9,8 @@ $(document).on('click','#btn_inputs', function() {
       $("#work_area").append($element);
 
       //make it "draggable" and "resizable"
-      $element.draggable().resizable();
+      $element.draggable({
+        containment: '#work_area',
+      }).resizable();
     // });
 });
