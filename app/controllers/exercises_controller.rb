@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-<<<<<<< HEAD
+
   def new_exercises
     p "-" * 50
     p "metodo new_exercises"
@@ -14,8 +14,9 @@ class ExercisesController < ApplicationController
     p "metodo new_canva"
     @exercise = Exercise.new
     p "!" * 50
-=======
+  end
+  
   def new
->>>>>>> creacionDiana
+
   end
 end
