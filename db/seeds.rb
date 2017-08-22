@@ -3,10 +3,10 @@ u = User.create!(name:  "Example User",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true)
-e = Exercise.create(name: "uno", file:"uno.html", user_id: u.id)
+e = Exercise.create(name: "multiplicacion", user_id: u.id)
 
- Answer.create!(value: "6", exercise_id: e.id)
- Answer.create(value: "papa", exercise_id: e.id)
+ Text.create(exercise_id: e.id, x_position: 558, y_position: 91, text: "5 x 4 =")
+ Input.create(exercise_id: e.id, x_position: 381, y_position: 91, answer: "20")
 
 UserExercise.create(user_id: u.id, exercise_id: e.id, score: 1)
 

@@ -15,8 +15,19 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new
     p "!" * 50
   end
-  
+
   def new
 
+  end
+
+  def index_user
+    p user_id = params[:user_id]
+    p @user = User.find(user_id)
+    p @exercises = Exercise.where(user_id: @user.id)
+  end
+
+  def show
+    p exercise_id = params[:exercise_id]
+    p @exercise = Exercise.find(exercise_id)
   end
 end

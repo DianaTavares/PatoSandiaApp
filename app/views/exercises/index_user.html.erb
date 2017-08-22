@@ -1,0 +1,29 @@
+<h1>Mis Ejercicios</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Nombre del Ejercicio</th>
+        <th>Veces que ha sido resuelto</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@exercises.each do |exercise|%>
+        <tr>
+          <td><%= link_to exercise.name, show_exercises_path(exercise.id) %></td>
+        <td><%=UserExercise.where(exercise_id: exercise.id).count%></td>
+        <td>
+          <button type="button" class="btn btn-danger">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+          <button type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "<-- Regresar a Perfil", current_user %>
