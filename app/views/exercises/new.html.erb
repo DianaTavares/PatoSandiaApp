@@ -1,10 +1,10 @@
 <h1>Creación de Ejercicios</h1>
 <div class="row botones">
   <div class="col-md-2">
-    <%= button_to "Crear Input", users_path, :method => "get", class: "btn btn-warning"  %>
+    <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
   </div>
   <div class="col-md-2">
-    <%= button_to "Crear cuadro de Texto", users_path, :method => "get", class: "btn btn-info"  %>
+    <button id="btn_text" class="btn btn-info">Agregar texto</button>
   </div>
 </div>
 <br>
@@ -19,5 +19,5 @@
       <%= f.text_field :name, class: 'inputdragable' %>
     </div>
   </div>
-  <%= f.submit "Guardar Ejericio", class: "btn btn-primary" %>
+  <%= f.submit "Terminar Ejericio", class: "btn btn-primary" %>
 <% end %>
