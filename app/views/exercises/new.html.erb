@@ -6,18 +6,20 @@
   <div class="col-md-2">
     <button id="btn_text" class="btn btn-info">Agregar texto</button>
   </div>
+  <div class="col-md-2">
+    <a href="#"><button id="btn_delete" class="btn btn-danger">Borrar area de trabajo</button></a>
+  </div>
 </div>
 <br>
-<%= form_for :exersice do |f| %>
+<%= form_for :exercise do |f| %>
   <div id="work_area">
-    <div class="makeMeDraggable2">
-      <%= f.label :name,'I1' %>
-      <%= f.text_field :name, class: 'inputdragable' %>
-    </div>
-    <div class="makeMeDraggable2">
-      <%= f.label :name, 'I2' %>
-      <%= f.text_field :name, class: 'inputdragable' %>
-    </div>
+    <!-- no borrar, util para ver el formato de cada input en los form_for -->
+    <!-- <div class="draggableResizable">
+      %= f.label :input,'I1' %
+      %= f.text_field :input  %
+    </div> -->
+
   </div>
-  <%= f.submit "Terminar Ejericio", class: "btn btn-primary" %>
+  <!-- metodo post -->
+  <%= f.submit "Terminar Ejericio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>
 <% end %>
