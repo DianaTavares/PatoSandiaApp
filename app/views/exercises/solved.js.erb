@@ -1,0 +1,9 @@
+<%@correct_answers.each do |correct_answer|%>
+  $("#<%=correct_answer%>").css("background-color", "#58D68D");
+<%end%>
+<%@wrong_answers.each do |wrong_answer|%>
+  $("#<%=wrong_answer%>").css("background-color", "#EC7063");
+<%end%>
+<%if @wrong_answers.length == 0 %>
+  $("#work_area2").append("<div class='congratulations'>Buen trabajo!!</div>")
+<% end %>

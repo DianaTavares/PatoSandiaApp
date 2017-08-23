@@ -29,5 +29,24 @@ class ExercisesController < ApplicationController
   def show
     p exercise_id = params[:exercise_id]
     p @exercise = Exercise.find(exercise_id)
+    p @texts = Text.where(exercise_id: @exercise.id)
+    p @inputs = Input.where(exercise_id: @exercise.id)
   end
+
+  def solved
+    @correct_answers = []
+    @wrong_answers = []
+    p exercise_id = params[:exercise_id]
+    p inputs = Input.where(exercise_id: exercise_id)
+    inputs.each do |input|
+      if  input.answer == params["#{input.id}"]
+        @correct_answers << input.id
+      else
+        @wrong_answers << input.id
+      end
+    end
+    p @correct_answers
+    p @wrong_answers
+  end
+
 end

@@ -11,7 +11,7 @@
     <tbody>
       <%@exercises.each do |exercise|%>
         <tr>
-          <td><%= link_to exercise.name, show_exercises_path(exercise.id) %></td>
+          <td><%= link_to exercise.name, show_exercise_path(exercise.id), remote: true %></td>
         <td><%=UserExercise.where(exercise_id: exercise.id).count%></td>
         <td>
           <button type="button" class="btn btn-danger">
@@ -25,5 +25,6 @@
       <% end %>
     </tbody>
   </table>
+  <div id="exercise-modal" class="modal fade"></div>
 
 <%= link_to "<-- Regresar a Perfil", current_user %>

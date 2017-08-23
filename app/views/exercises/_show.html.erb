@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Ejercicio: "<%=@exercise.name%>"</h3>
+    </div>
+    <%= form_for :exercises, url: solved_exercise_path(@exercise.id), remote: true do |f| %>
+      <div class="modal-body">
+        <div id="work_area2">
+        </div>
+      </div>
+      <div class="modal-footer">
+      <%= f.submit "Revisar ejercicio", class: "btn btn-success" %>
+      <button type="button" class="btn btn-block btn-danger boton_cerrar" data-dismiss="modal">Cerrar</button>
+    </div>
+  <% end %>
+  </div>
+</div>

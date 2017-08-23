@@ -1,0 +1,18 @@
+$("#exercise-modal").html("<%= escape_javascript(render 'show') %>")
+$("#exercise-modal").modal("show")
+//inicializamos las variables de las posiciones
+var xt = 0
+var yt = 0
+var xi = 0
+var yi = 0
+<% @texts.each do |text| %>
+// estamos restando a la x_position 88 y a la y_position 377 por la diferencia de posiciones entre la creación de ejercicios y el show exercises
+  xt = <%=text.x_position - 90%>
+  yt = <%=text.y_position - 377%>
+  $("#work_area2").append(" <p id='p<%=text.id%>' class='text' style='position: absolute; left: " + xt + "px; top: " + yt + "px '><%=text.text%></p>");
+<% end %>
+<% @inputs.each do |input| %>
+  xi = <%=input.x_position - 90%>
+  yi = <%=input.y_position - 377%>
+  $("#work_area2").append(" <input type='text' id='<%=input.id%>' class='inputtext' name='<%=input.id%>' style='position: absolute; left: " + xi + "px; top: " + yi + "px '>");
+<% end %>

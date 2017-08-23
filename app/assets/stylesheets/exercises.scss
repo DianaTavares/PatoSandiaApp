@@ -6,12 +6,15 @@
   border-style: solid;
 
 }
+h3{
+  text-align: center;
+}
 #work_area2{
   //background-color: aqua;
   //position: absolute;
   width: 100%;
   height: 350px;
-  border-style: solid;
+  // border: 1px solid darkgray;
 
 }
 
@@ -36,4 +39,24 @@
 
 td, th{
   text-align: center;
+}
+
+.text, .inputtext{
+  width: 60px;
+  margin: 0;
+}
+
+.congratulations{
+  font-size: 30px;
+  position: absolute;
+  left: 200px;
+  top: 100px;
+  padding: 80px 15px;
+  background-image: url("estrella.png");
+  font-style: italic;
+}
+
+.boton_cerrar{
+  margin-top: 5px;
+  margin-left: 0px!important;
 }
