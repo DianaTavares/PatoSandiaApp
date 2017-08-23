@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  # post 'exercises/canva', to: 'exercises#canva'
+  post '/exercises/new', to: 'exercises#new', as: 'exercises_new'
+  get 'exercises/new', to: 'exercises#new', as: 'exercises'
+
   #ruta que revisa si un ejercicios esta bien o no
   post '/exercises/:exercise_id/solved' => 'exercises#solved', as: 'solved_exercise'
 
-  # get 'exercises/canva', to: 'exercises#canva'
-  # get 'exercises/new_exercises', to: 'exercises#new_exercises' #, as: creacion_de_ejercicios
+
   #ruta para mostar los ejercicios de un usuario
   get'/exercises/index_user/:user_id/' => 'exercises#index_user', as: 'index_user_exercises'
   #ruta para ir a resolver un ejercicio
   get '/exercises/:exercise_id', to: 'exercises#show', as: 'show_exercise'
 
-  post '/exercises/new', to: 'exercises#new', as: 'exercises_new'
-  get 'exercises/new', to: 'exercises#new', as: 'exercises'
 
   get 'sessions/new'
   get 'user/new'

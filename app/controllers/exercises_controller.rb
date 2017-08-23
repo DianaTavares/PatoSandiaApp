@@ -1,32 +1,5 @@
 class ExercisesController < ApplicationController
 
-  # def new_exercises
-  #   p "-" * 50
-  #   p "metodo new_exercises"
-  #   @exercise = Exercise.new
-  #   # render 'exercises/new_exercises'
-  #   #  p respond_to :html, :js
-  #   p "." * 50
-  # end
-  #
-  # def new_canva
-  #   p "!" * 50
-  #   p "metodo new_canva"
-  #   @exercise = Exercise.new
-  #   p "!" * 50
-  # end
-
-# # <<<<<<< HEAD
-  # def new_canva
-  #   p "!" * 50
-  #   p "metodo new_canva"
-  #   @exercise = Exercise.new
-  #   p "!" * 50
-  # end
-#
-# =======
-# >>>>>>> creacion_ejercicios
-
   def new
     p "." * 50
     p "new ExercisesController"
@@ -36,7 +9,6 @@ class ExercisesController < ApplicationController
     p "." * 50
   end
 
-# <<<<<<< HEAD
   def index_user
     p user_id = params[:user_id]
     p @user = User.find(user_id)
@@ -62,13 +34,13 @@ class ExercisesController < ApplicationController
         @wrong_answers << input.id
       end
     end
-    p @correct_answers
-    p @wrong_answers
+    # borramos: @correct_answers y  @wrong_answers
   end
 
-# =======
-  # def creacion_de_ejercicios
-  #
-  # end
-# >>>>>>> creacion_ejercicios
+  def creacion_de_ejercicios
+    p "{}"* 50
+    p "creacion_de_ejercicios"
+    p "{}"* 50
+  end
+
 end
