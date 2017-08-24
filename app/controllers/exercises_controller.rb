@@ -2,17 +2,44 @@ class ExercisesController < ApplicationController
 
   def create_exercise
     p "-"* 50
-    p "CREATE EXERCISE"
     if params[:authenticity_token]
-      #  "positions"=>{"input1-top"=>"377", "input1-left"=>"18", "input2-top"=>"477", "input2-left"=>"18"}
-      #  Input.new(x_position: 160, y_position: 397, answer: "20")
-      # Text.create(exercise_id: e.id, x_position: 110, y_position: 397, text: "5 x 4 =")
-      p params
+      #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+      #Text.new(exercise_id: e.id, x_position: 110, y_position: 397, text: input.last )
+      # determinar numero de inputs
+      p params[:exercise].count
+
+      inputs = params[:exercise]
+      posiciones_keys = params[:positions].keys
+      k_index = 0
+      p "inputs"
+      inputs.each_with_index do |input, index|
+        # {"input1_top"=>"377", "input1_left"=>"18"}
+          Text.new(text: input.last )
+           p posiciones_keys[k_index]
+            k_index = k_index + 1
+           p posiciones_keys[k_index]
+           k_index = k_index + 1
+      end
+      p "inputs" 
+
+
+      # for new_input in 1..num_of_inputs do
+      #   p "CREATE EXERCISE"
+      #   p params[:exercise]#[:input1]
+      #
+      # end
+
+
+      # Input.new(x_position: params[:positions][:input1_top], y_position: params[:positions][:input1_top], answer: "20")
+
     end
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     @exercises = Exercise.all
     # mostra vista con todos los ejercicios
-    render "index_user"
+    # render "index_user"
+
+    # solo para pruebas, boton_cerrar
+    render 'exercises/new'
     p "-"* 50
   end
 

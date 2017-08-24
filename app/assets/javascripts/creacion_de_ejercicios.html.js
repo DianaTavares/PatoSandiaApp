@@ -30,8 +30,8 @@ $(document).on('click','#btn-terminar-ejercicio', function(event) {
     // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
     var position = positions + 1
     // anexar  un input de texto al area de trabajo donde el value = cordenadas del elemento, uno para top y otro para left
-    $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $top +' name="positions[input'+ position +'-top]" /></label>');
-    $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'-left]" /></label>');
+    $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $top +' name="positions[input'+ position +'_top]" /></label>');
+    $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'_left]" /></label>');
   }
 
         //   var person = prompt("Please enter your name", "Harry Potter");
