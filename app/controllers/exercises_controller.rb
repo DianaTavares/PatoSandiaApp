@@ -1,10 +1,25 @@
 class ExercisesController < ApplicationController
 
+  def create_exercise
+    p "{"* 50
+    p "previw"
+    @exercises = Exercise.all
+    render "index_user"
+    p "{"* 50
+  end
+
+  def save_exercise
+    p "{"* 50
+    p "save_exercise"
+    p "{"* 50
+  end
+
   def new
     p "." * 50
     p "new ExercisesController"
+    # p save_exercise
     if params[:authenticity_token]
-      p params
+
     end
     p "." * 50
   end
@@ -37,10 +52,5 @@ class ExercisesController < ApplicationController
     # borramos: @correct_answers y  @wrong_answers
   end
 
-  def creacion_de_ejercicios
-    p "{}"* 50
-    p "creacion_de_ejercicios"
-    p "{}"* 50
-  end
 
 end
