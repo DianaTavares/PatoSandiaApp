@@ -1,27 +1,25 @@
 class ExercisesController < ApplicationController
 
   def create_exercise
-    p "{"* 50
-    p "previw"
+    p "-"* 50
+    p "CREATE EXERCISE"
+    if params[:authenticity_token]
+      #  "positions"=>{"input1-top"=>"377", "input1-left"=>"18", "input2-top"=>"477", "input2-left"=>"18"}
+      #  Input.new(x_position: 160, y_position: 397, answer: "20")
+      # Text.create(exercise_id: e.id, x_position: 110, y_position: 397, text: "5 x 4 =")
+      p params
+    end
+    # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     @exercises = Exercise.all
+    # mostra vista con todos los ejercicios
     render "index_user"
-    p "{"* 50
-  end
-
-  def save_exercise
-    p "{"* 50
-    p "save_exercise"
-    p "{"* 50
+    p "-"* 50
   end
 
   def new
-    p "." * 50
-    p "new ExercisesController"
-    # p save_exercise
-    if params[:authenticity_token]
-
-    end
-    p "." * 50
+    # p "." * 50
+    # p "new ExercisesController"
+    # p "." * 50
   end
 
   def index_user
