@@ -9,6 +9,11 @@ class ExercisesController < ApplicationController
     p "." * 50
   end
 
+  def index
+    @user = User.find(params[:user_id])
+    @exercises = Exercise.all
+  end
+
   def index_user
     p user_id = params[:user_id]
     p @user = User.find(user_id)
@@ -25,8 +30,9 @@ class ExercisesController < ApplicationController
   def solved
     @correct_answers = []
     @wrong_answers = []
-    p exercise_id = params[:exercise_id]
-    p inputs = Input.where(exercise_id: exercise_id)
+    exercise_id = params[:exercise_id]
+    @exercise = Exercise.find(exercise_id)
+    inputs = Input.where(exercise_id: exercise_id)
     inputs.each do |input|
       if  input.answer == params["#{input.id}"]
         @correct_answers << input.id
@@ -34,7 +40,10 @@ class ExercisesController < ApplicationController
         @wrong_answers << input.id
       end
     end
-    # borramos: @correct_answers y  @wrong_answers
+    #Solo se guardará el ejercicio en la base de datos si el usuaio no es el que creo el ejercicio
+    if current_user.id != @exercise.user_id
+      p UserExercise.create(user_id: current_user.id, exercise_id: @exercise.id, score: @correct_answers.length)
+    end
   end
 
   def creacion_de_ejercicios

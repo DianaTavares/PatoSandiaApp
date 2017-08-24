@@ -7,9 +7,12 @@ Rails.application.routes.draw do
 
 
   #ruta para mostar los ejercicios de un usuario
-  get'/exercises/index_user/:user_id/' => 'exercises#index_user', as: 'index_user_exercises'
+  get'/exercises/index_user/:user_id/' => 'exercises#index_user', as: 'exercises_index_user'
+  #ruta para mostrar los ejercicios de todos los usuarios (Comunidad)
+  get'/exercises/index/:user_id/' => 'exercises#index', as: 'exercises_index'
   #ruta para ir a resolver un ejercicio
   get '/exercises/:exercise_id', to: 'exercises#show', as: 'show_exercise'
+
 
 
   get 'sessions/new'

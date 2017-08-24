@@ -1,0 +1,30 @@
+<div class="center jumbotron comunidad">
+  <h1>Comunidad de Ejercicios</h1>
+  <h3>Aquí estan todos los ejercicios creados en SiTREC</h3>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Nombre del Ejercicio</th>
+        <th>Autor</th>
+        <th>Fecha de creación</th>
+        <th>Veces que ha sido resuelto</th>
+        <th>Veces que <%= @user.name%> lo ha resuelto<th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@exercises.each do |exercise|%>
+        <tr>
+          <td><%= link_to exercise.name, show_exercise_path(exercise.id), remote: true %></td>
+          <td> <%= exercise.user.name %> </td>
+          <td> <%= exercise.created_at.strftime('%d-%B-%Y')%> </td>
+          <% num = UserExercise.where(exercise_id: exercise.id).count%>
+          <td ><span id="totalTimes<%= exercise.id %>"><%=num.to_i%></span></td>
+          <td id="totalUser<%= exercise.id %>"><%=UserExercise.where(exercise_id: exercise.id, user_id: @user.id).count%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div id="exercise-modal" class="modal fade"></div>
+
+<%= link_to "<-- Regresar a Perfil", current_user %>

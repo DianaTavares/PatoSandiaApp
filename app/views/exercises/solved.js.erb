@@ -5,5 +5,13 @@
   $("#<%=wrong_answer%>").css("background-color", "#EC7063");
 <%end%>
 <%if @wrong_answers.length == 0 %>
-  $("#work_area2").append("<div class='congratulations'>Buen trabajo!!</div>")
+  $("#work_area2").append("<div class='congratulations'>Buen trabajo!!</div>");
+  $(".revisar").hide();
 <% end %>
+// modificamos la cantidad de usuarios que han resuleto ese ejercicio
+console.log("#totalTimes<%= @exercise.id %>");
+console.log("<%=UserExercise.where(exercise_id: @exercise.id).count%>");
+$("#totalTimes<%= @exercise.id %>").text("<%=UserExercise.where(exercise_id: @exercise.id).count%>");
+console.log("#totalUser<%= @exercise.id %>");
+console.log("<%=UserExercise.where(exercise_id: @exercise.id, user_id: current_user.id).count%>");
+$("#totalUser<%= @exercise.id %>").text("<%=UserExercise.where(exercise_id: @exercise.id, user_id: current_user.id).count%>");
