@@ -50,6 +50,10 @@ class ExercisesController < ApplicationController
     end
   end
 
+  #abrir la ventana modal para ponerle nombre al ejercicio
+  def modal_name
+  end
+
   def creacion_de_ejercicios
     p "{}"* 50
     p "creacion_de_ejercicios"

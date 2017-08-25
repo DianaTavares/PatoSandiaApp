@@ -1,11 +1,33 @@
-<% provide(:title, "About") %>
-<h1>About</h1>
+<% provide(:title, "Nosotros") %>
+<div class="center jumbotron comunidad">
+  <h1>Nosotros</h1>
+  <h3>¡Conoce nuestra historia!</h3>
+</div>
+
 <p>
-  The <a href="http://www.railstutorial.org/"><em>Ruby on Rails
-  Tutorial</em></a> is a
-  <a href="http://www.railstutorial.org/book">book</a> and
-  <a href="http://screencasts.railstutorial.org/">screencast series</a>
-  to teach web development with
-  <a href="http://rubyonrails.org/">Ruby on Rails</a>.
-  This is the sample application for the tutorial.
+  Somos PatoSandia Co, un proyecto de Desarrollo Web creado por <a href="https://github.com/doberman7">Ivan Rubio</a> y <a href="https://www.linkedin.com/in/dianalt/">Diana López</a>. Buscamos crear aplicaciones que mejoren las vida de las personas.
 </p>
+<p>
+  La plataforma <b>SiTREC</b> para la creación de Ejercicios Interactivos es la primera aplicación de PatoSandia Co dirigida a profesores para que puedan crear Ejercicios Interactivos acordes a las necesidades de sus estudiantes. Los profesores no necesitan de conocimientos de programación para usar la plataforma, basta con presionar botones, arrastrar y escribir el texto de los ejercicios y las respuestas. Sus estudiantes se logean en la plataforma y podrán resolver sus tareas en línea, con retroalimentación inmediata.
+</p>
+<p><%= link_to "Registrate ahora!", signup_path %></p>
+
+<h1 class="nosotros"> Conoce a nuestro equipo </h1>
+
+<table class="table table_nosotros">
+    <tbody>
+        <tr>
+          <td><%= image_tag("ivan.png", :alt => "ivan", :class => "foto") %></td>
+          <td class="nosotros">
+            <h3 class="nosotros">Ivan Rubio </h3>
+          </td>
+       </tr>
+       <tr>
+         <td><%= image_tag("diana.png", :alt => "diana", :class => "foto") %></td>
+         <td class="nosotros">
+            <h3 class="nosotros"> Diana López </h3>
+            <p>Desarrolladora Web e Investigadora en Física Educativa. Se dedica al desarrollo de material didáctico para la enseñanza y el aprendizaje de Física y Matemáticas. Su especialidad es el desarrollo de material virtual. </p>
+         </td>
+      </tr>
+    </tbody>
+  </table>

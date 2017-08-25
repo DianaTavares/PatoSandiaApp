@@ -10,7 +10,7 @@
   </aside>
   <div class="col-md-2">
     <!-- metodo GET -->
-    <%= link_to image_tag("creacion.png", alt: "creacion logo"),{action: 'new', controller: 'exercises'}, id: "imagen-creacion", class: "bolitas" %>
+    <%= link_to image_tag("creacion.png", alt: "creacion logo"), exercises_modal_name_path, remote: true, id: "imagen-creacion", class: "bolitas" %>
     <p>Creación de Ejercicios</p>
   </div>
   <div class="col-md-2">
@@ -23,3 +23,5 @@
   </div>
 
 </div>
+
+  <div id="exercise-modal" class="modal fade"></div>
