@@ -12,10 +12,10 @@
               </tr>
             </thead>
             <tbody>
-              <%@users_exercise.each do |round|%>
+              <%@name_score.each do |round|%>
                 <tr>
-                  <td><%= round.user.name %></td>
-                  <td><%= round.score %> de <%= @exercise.inputs.count%></td>
+                  <td><%= round[0] %></td>
+                  <td><%= round[1]%> de <%= @exercise.inputs.count%></td>
               </tr>
             <% end %>
           </tbody>
