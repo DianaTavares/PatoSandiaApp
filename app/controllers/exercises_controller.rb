@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
     p "-"* 50
     if params[:authenticity_token]
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-      # {"input1_top"=>"377", "input1_left"=>"18"}              
+      # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
       p params[:exercise].count
       #  obtener los inputs_text => {"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
@@ -13,14 +13,21 @@ class ExercisesController < ApplicationController
       posiciones_keys = params[:positions].keys
       k_index = 0
       inputs.each_with_index do |input, index|
-          # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+        # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+          #  y asignar top
           top =   params[:positions][posiciones_keys[k_index].to_sym]
+          # sumar uno a la llave del index para buscar el siguiente param
           k_index = k_index + 1
+          # extraer valores del left del pararam positions
           left =  params[:positions][posiciones_keys[k_index].to_sym]
           k_index = k_index + 1
-          p input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i, exercise_id: 1)
+          # crear elobjeto y agregar atributos
+          input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+          # crear ibjeto para asigar el enercios CAMBIAR
+          e = Exercise.create(user_id: current_user.id)
+          input.update(exercise_id: e.id)
           p input.save
-          p input
+          p Input.last(3)
       end
 
 
@@ -38,11 +45,7 @@ class ExercisesController < ApplicationController
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     @exercises = Exercise.all
     # mostra vista con todos los ejercicios
-    # render "index_user"
-
-    # solo para pruebas, boton_cerrar
-    render 'exercises/new'
-    p "-"* 50
+    render "index_user"
   end
 
   def new

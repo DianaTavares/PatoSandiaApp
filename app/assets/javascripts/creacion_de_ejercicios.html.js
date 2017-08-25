@@ -36,7 +36,7 @@ $(document).on('click','#btn-terminar-ejercicio', function(event) {
     $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'_left]" /></label>');
   }
 
-        //   var person = prompt("Please enter your name", "Harry Potter");
+        // var person = prompt("Please enter your name");
         //
         // if (person == null || person == "") {
         //     txt = "User cancelled the prompt.";
