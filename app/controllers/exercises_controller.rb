@@ -1,10 +1,18 @@
 class ExercisesController < ApplicationController
 
+  def new
+    p "." * 50
+    p "new ExercisesController"
+    # "exercises"=>{"name_exercise"=>"ejer"}
+    p $name_exercise = params[:exercises][:name_exercise]
+    p "." * 50
+  end
+
   def create_exercise
     p "-"* 50
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
-      e = Exercise.create(user_id: current_user.id, name: "Prueba")
+      e = Exercise.create(user_id: current_user.id, name: $name_exercise)
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
@@ -48,11 +56,6 @@ class ExercisesController < ApplicationController
     render "index_user"
   end
 
-  def new
-    # p "." * 50
-    # p "new ExercisesController"
-    # p "." * 50
-  end
 
   #Muestra la lista de otos los ejercicios creados
   def index
