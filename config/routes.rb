@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  #Ruta que abre la ventana modal para ingresar el nombre del ejercicio
+  get '/exercises/name', to: 'exercises#modal_name', as: 'exercises_modal_name'
 
   post "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise'
   get "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise_get'
@@ -22,8 +24,7 @@ Rails.application.routes.draw do
   get '/exercises/delete/:exercise_id', to: 'exercises#delete', as: 'exercises_delete'
   #ruta para mostrar los usuarios que han resuelto un ejercicio
   get '/exercises/:exercise_id/users_list', to: 'exercises#users_list', as: 'users_exercise_list'
-  #Ruta que abre la ventana modal para ingresar el nombre del ejercicio
-  get '/exercises/name', to: 'exercises#modal_name', as: 'exercises_modal_name'
+
 
   get 'sessions/new'
   get 'user/new'
