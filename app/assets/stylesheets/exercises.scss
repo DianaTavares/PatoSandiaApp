@@ -3,6 +3,11 @@
   display: none
 }
 
+// cambiar el tamaño de una ventana modal
+.modal-for-solve{
+  width: 1120px;
+  left: -250px;
+}
 
 
 #work_area{
@@ -57,7 +62,7 @@ td, th{
 .congratulations{
   font-size: 30px;
   position: absolute;
-  left: 200px;
+  left: 500px;
   top: 100px;
   padding: 80px 15px;
   background-image: url("estrellita.png");
