@@ -4,23 +4,25 @@ class ExercisesController < ApplicationController
     p "-"* 50
     if params[:authenticity_token]
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-      #Text.new(exercise_id: e.id, x_position: 110, y_position: 397, text: input.last )
+      # {"input1_top"=>"377", "input1_left"=>"18"}              
       # determinar numero de inputs
       p params[:exercise].count
-
+      #  obtener los inputs_text => {"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       inputs = params[:exercise]
+      # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       posiciones_keys = params[:positions].keys
       k_index = 0
-      p "inputs"
       inputs.each_with_index do |input, index|
-        # {"input1_top"=>"377", "input1_left"=>"18"}
-          Text.new(text: input.last )
-           p posiciones_keys[k_index]
-            k_index = k_index + 1
-           p posiciones_keys[k_index]
-           k_index = k_index + 1
+          # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+          top =   params[:positions][posiciones_keys[k_index].to_sym]
+          k_index = k_index + 1
+          left =  params[:positions][posiciones_keys[k_index].to_sym]
+          k_index = k_index + 1
+          p input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i, exercise_id: 1)
+          p input.save
+          p input
       end
-      p "inputs" 
+
 
 
       # for new_input in 1..num_of_inputs do

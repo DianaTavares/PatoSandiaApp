@@ -26,6 +26,8 @@ $(document).on('click','#btn-terminar-ejercicio', function(event) {
     // obtner las cordenadas top y left de cada elemento creado
     var $top = $array[positions].offset().top;
     var $left = $array[positions].offset().left;
+    console.log($top);
+    console.log($left);
     // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
     // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
     var position = positions + 1
@@ -42,4 +44,5 @@ $(document).on('click','#btn-terminar-ejercicio', function(event) {
         //     txt = "Hello " + person + "! How are you today?";
         // }
 
+        // alert("fin")
 });
