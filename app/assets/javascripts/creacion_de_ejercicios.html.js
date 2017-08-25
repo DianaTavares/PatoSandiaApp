@@ -16,7 +16,7 @@ $(document).ready(function() {
     console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div class="draggableResizable draggableinput"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />input, muevelo</label>');
+    var $element = $('<div class="draggableResizable draggableinput" style="position: absolute; left: 95px; top: 210px"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />input, muevelo</label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
@@ -30,7 +30,6 @@ $(document).ready(function() {
     // });
     //funcion para que el input se ajuste al contenido
     function resizeInput() {
-      console.log("entre al tamaño del input");
       var valueLength = $(this).prop('value').length;
       console.log(valueLength);
       // Para que no arroje error si el input se vacía
@@ -49,7 +48,7 @@ $(document).on('click','#btn_text', function() {
       $textN++
       // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
       // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-      var $element = $('<div class="draggableResizable draggabletext" style="position: absolute; left: 81px; top: 205px" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />texto, muevelo</label>');
+      var $element = $('<div class="draggableResizable draggabletext" style="position: absolute; left: 95px; top: 210px" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />texto, muevelo</label>');
       // console.log($element);
       $array.push($element);
       //append it to the DOM
@@ -63,7 +62,6 @@ $(document).on('click','#btn_text', function() {
     // });
     //esta función se agregó para el el tamaño del input se ajuste al texto
     function resizeInput() {
-      console.log("entre al tamaño del input");
       var valueLength = $(this).prop('value').length;
       console.log(valueLength);
       // Para que no arroje error si el input se vacía
