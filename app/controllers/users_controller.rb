@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    #Camiamos el uso de params[:id], por el de current user para que no pudiara un usuario acceder a un perfil que no es el suyo
+    @user = User.find(current_user.id)
   end
 
   def new
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Bienvenido a SiTREC de PatoSandia!"
       redirect_to @user
     else
       render 'new'
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "cambios en el Perfil guardados"
       redirect_to @user
     else
       render 'edit'
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Usuario eliminado"
     redirect_to users_url
   end
 
@@ -63,7 +64,7 @@ class UsersController < ApplicationController
     def logged_in_user
       unless logged_in?
         store_location
-        flash[:danger] = "Please log in."
+        flash[:danger] = "Primero has Log In"
         redirect_to login_url
       end
     end

@@ -13,12 +13,12 @@
       <!-- Cehck box para recordar la informacion de login del usuario en browser a traves de cookies -->
       <%= f.label :remember_me, class: "checkbox inline" do %>
         <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
+        <span>Recuerdame en este equipo</span>
       <% end %>
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <p>¿Nuevo usuario? <%= link_to "Registrate ahora!", signup_path %></p>
   </div>
 </div>

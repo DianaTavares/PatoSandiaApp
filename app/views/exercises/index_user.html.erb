@@ -1,4 +1,9 @@
-<h1>Mis Ejercicios</h1>
+<div class="center jumbotron comunidad">
+  <h1>Mis Ejercicios</h1>
+  <h3>Aquí estan todos tus ejercicios creados en SiTREC</h3>
+</div>
+
+
 
 <table class="table">
     <thead>
@@ -12,19 +17,20 @@
       <%@exercises.each do |exercise|%>
         <tr>
           <td><%= link_to exercise.name, show_exercise_path(exercise.id), remote: true %></td>
-        <td><%=UserExercise.where(exercise_id: exercise.id).count%></td>
+        <td><%= link_to UserExercise.where(exercise_id: exercise.id).count, users_exercise_list_path(exercise.id), remote: true %></td>
         <td>
-          <button type="button" class="btn btn-danger">
-            <span class="glyphicon glyphicon-trash"></span>
-          </button>
           <button type="button" class="btn btn-success">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
+          <%= link_to exercises_delete_path(exercise.id), class: "btn btn-danger", data: { confirm: "¿Seguro que deseas eliminar el ejercicio?" } do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
         </td>
       </tr>
       <% end %>
     </tbody>
   </table>
   <div id="exercise-modal" class="modal fade"></div>
-
+<br>
+<br>
 <%= link_to "<-- Regresar a Perfil", current_user %>

@@ -9,9 +9,5 @@
   $(".revisar").hide();
 <% end %>
 // modificamos la cantidad de usuarios que han resuleto ese ejercicio
-console.log("#totalTimes<%= @exercise.id %>");
-console.log("<%=UserExercise.where(exercise_id: @exercise.id).count%>");
 $("#totalTimes<%= @exercise.id %>").text("<%=UserExercise.where(exercise_id: @exercise.id).count%>");
-console.log("#totalUser<%= @exercise.id %>");
-console.log("<%=UserExercise.where(exercise_id: @exercise.id, user_id: current_user.id).count%>");
 $("#totalUser<%= @exercise.id %>").text("<%=UserExercise.where(exercise_id: @exercise.id, user_id: current_user.id).count%>");

@@ -1,0 +1,28 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Usuarios que han resuelto el ejercicio: "<%=@exercise.name%>"</h3>
+    </div>
+      <div class="modal-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%@users_exercise.each do |round|%>
+                <tr>
+                  <td><%= round.user.name %></td>
+                  <td><%= round.score %> de <%= @exercise.inputs.count%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-block btn-primary boton_cerrar" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+</div>
