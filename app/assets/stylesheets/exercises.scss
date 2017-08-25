@@ -42,13 +42,28 @@ h3{
 .botones{
   margin-top: -50px;
 }
-
-.draggableResizable{
+//estilo para los elementos que se crean en la sección de Creación
+.draggabletext{
     width      : 100px;
-    height     : 100px;
-    background : gold;
+    height     : 40px;
+    background : #5bc0de;
     color: midnightblue;
+    input{
+      margin-bottom: 0;
+    }
 }
+
+.draggableinput{
+    width      : 100px;
+    height     : 40px;
+    background : #f0ad4e;
+    color: midnightblue;
+    input{
+      margin-bottom: 0;
+    }
+}
+
+
 
 td, th{
   text-align: center;
@@ -64,8 +79,8 @@ td, th{
   position: absolute;
   left: 500px;
   top: 100px;
-  padding: 80px 15px;
-  background-image: url("estrellita.png");
+  padding: 79px 7px;
+  background-image: url("https://vignette1.wikia.nocookie.net/absolute-duo/images/1/10/Estrella_destacado.png.png/revision/latest?cb=20150414210545&path-prefix=es");
   font-style: italic;
 }
 

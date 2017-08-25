@@ -16,7 +16,7 @@ $(document).ready(function() {
     console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div class="draggableResizable"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />este es un input arrastralo</label>');
+    var $element = $('<div class="draggableResizable draggableinput"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />input, muevelo</label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
@@ -28,19 +28,32 @@ $(document).ready(function() {
       containment: '#work_area',
     }).resizable();
     // });
-  });
-  $(document).on('click','#btn_text', function() {
-    console.log($textN);
-    // sumar uno al inputN
-    $textN++
-    console.log($textN);
-    // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
-    // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div class="draggableResizable"/>').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />este es un texto, arrastralo</label>');
-    // console.log($element);
-    $array.push($element);
-    //append it to the DOM
-    $("#work_area").append($element);
+    //funcion para que el input se ajuste al contenido
+    function resizeInput() {
+      console.log("entre al tamaño del input");
+      var valueLength = $(this).prop('value').length;
+      console.log(valueLength);
+      // Para que no arroje error si el input se vacía
+      if (valueLength > 0) {
+
+      $(this).prop('size', valueLength);
+      }
+    }
+
+    $('#input-'+$inputN+'').on('keyup', resizeInput).each(resizeInput);
+});
+
+var $textN = 0
+$(document).on('click','#btn_text', function() {
+  // sumar uno al inputN
+      $textN++
+      // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
+      // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
+      var $element = $('<div class="draggableResizable draggabletext" style="position: absolute; left: 81px; top: 205px" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />texto, muevelo</label>');
+      // console.log($element);
+      $array.push($element);
+      //append it to the DOM
+      $("#work_area").append($element);
 
     //make it "draggable" and "resizable"
     $element.draggable({
@@ -48,8 +61,21 @@ $(document).ready(function() {
       containment: '#work_area',
     }).resizable();
     // });
-  });
+    //esta función se agregó para el el tamaño del input se ajuste al texto
+    function resizeInput() {
+      console.log("entre al tamaño del input");
+      var valueLength = $(this).prop('value').length;
+      console.log(valueLength);
+      // Para que no arroje error si el input se vacía
+      if (valueLength > 0) {
 
+      $(this).prop('size', valueLength);
+      }
+    }
+
+    $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
+
+});
 
   $(document).on('click','#btn-terminar-ejercicio', function(event) {
     // desde el 0 hasta el numero de elementos creados en el área de trabajo y empujados
