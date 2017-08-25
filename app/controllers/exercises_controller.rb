@@ -65,8 +65,9 @@ class ExercisesController < ApplicationController
     @exercises = Exercise.all.reverse
     # mostra vista con todos los ejercicios
     # limpiar variable glob
-    $name_exercise = nil
+
     render "index_user"
+    $name_exercise = nil
   end
 
 
