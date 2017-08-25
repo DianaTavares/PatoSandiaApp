@@ -1,12 +1,57 @@
 class ExercisesController < ApplicationController
 
-  def new
-    p "." * 50
-    p "new ExercisesController"
+  def create_exercise
+    p "-"* 50
     if params[:authenticity_token]
-      p params
+      #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+      # {"input1_top"=>"377", "input1_left"=>"18"}
+      # determinar numero de inputs
+      p params[:exercise].count
+      #  obtener los inputs_text => {"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+      inputs = params[:exercise]
+      # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+      posiciones_keys = params[:positions].keys
+      k_index = 0
+      inputs.each_with_index do |input, index|
+        # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+          #  y asignar top
+          top =   params[:positions][posiciones_keys[k_index].to_sym]
+          # sumar uno a la llave del index para buscar el siguiente param
+          k_index = k_index + 1
+          # extraer valores del left del pararam positions
+          left =  params[:positions][posiciones_keys[k_index].to_sym]
+          k_index = k_index + 1
+          # crear elobjeto y agregar atributos
+          input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+          # crear ibjeto para asigar el enercios CAMBIAR
+          e = Exercise.create(user_id: current_user.id)
+          input.update(exercise_id: e.id)
+          p input.save
+          p Input.last(3)
+      end
+
+
+
+      # for new_input in 1..num_of_inputs do
+      #   p "CREATE EXERCISE"
+      #   p params[:exercise]#[:input1]
+      #
+      # end
+
+
+      # Input.new(x_position: params[:positions][:input1_top], y_position: params[:positions][:input1_top], answer: "20")
+
     end
-    p "." * 50
+    # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
+    @exercises = Exercise.all
+    # mostra vista con todos los ejercicios
+    render "index_user"
+  end
+
+  def new
+    # p "." * 50
+    # p "new ExercisesController"
+    # p "." * 50
   end
 
   #Muestra la lista de otos los ejercicios creados
@@ -50,11 +95,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  def creacion_de_ejercicios
-    p "{}"* 50
-    p "creacion_de_ejercicios"
-    p "{}"* 50
-  end
 
   #Acción para mostrar una lista con los usuariosque han resuleto un ejercicio, hace llamada a js
   def users_list

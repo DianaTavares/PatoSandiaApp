@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  #ruta para mostar los ejercicios de un usuario
+  get'/exercises/index_user/:user_id/' => 'exercises#index_user', as: 'index_user_exercises'
+
+  post "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise'
+  get "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise_get'
+
   post '/exercises/new', to: 'exercises#new', as: 'exercises_new'
   get 'exercises/new', to: 'exercises#new', as: 'exercises'
 
@@ -6,10 +12,13 @@ Rails.application.routes.draw do
   post '/exercises/:exercise_id/solved' => 'exercises#solved', as: 'solved_exercise'
 
 
+<<<<<<< HEAD
   #ruta para mostar los ejercicios de un usuario
   get'/exercises/index_user/' => 'exercises#index_user', as: 'exercises_index_user'
   #ruta para mostrar los ejercicios de todos los usuarios (Comunidad)
   get'/exercises/index/' => 'exercises#index', as: 'exercises_index'
+=======
+>>>>>>> controler-bd
   #ruta para ir a resolver un ejercicio
   get '/exercises/:exercise_id', to: 'exercises#show', as: 'show_exercise'
   #ruta para eliminar un ejercicio
