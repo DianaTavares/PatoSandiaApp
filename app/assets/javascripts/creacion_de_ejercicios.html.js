@@ -19,6 +19,26 @@ $(document).on('click','#btn_inputs', function() {
       }).resizable();
     // });
 });
+var $textN = 0
+$(document).on('click','#btn_text', function() {
+  // sumar uno al inputN
+      $textN++
+      // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
+      // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
+      var $element = $('<div class="draggableResizable"/>').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />este es un texto, arrastralo</label>');
+      // console.log($element);
+      $array.push($element);
+      //append it to the DOM
+      $("#work_area").append($element);
+
+      //make it "draggable" and "resizable"
+      $element.draggable({
+        // manterlo limitado al área de trabajo
+        containment: '#work_area',
+      }).resizable();
+    // });
+});
+
 
 $(document).on('click','#btn-terminar-ejercicio', function(event) {
   // desde el 0 hasta el numero de elementos creados en el área de trabajo y empujados

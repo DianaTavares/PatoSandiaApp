@@ -10,19 +10,21 @@ class ExercisesController < ApplicationController
 
   def create_exercise
     p "-"* 50
+    p "create_exercise"
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
       e = Exercise.create(user_id: current_user.id, name: $name_exercise)
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
-      p params[:exercise].count
       #  obtener los inputs_text => {"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       inputs = params[:exercise]
       # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       posiciones_keys = params[:positions].keys
       k_index = 0
       inputs.each_with_index do |input, index|
+        p "-" * 50
+        # cada input es un Ary["si es Text o input", "el valor del mismo"]
         # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
           #  y asignar top
           top =   params[:positions][posiciones_keys[k_index].to_sym]
@@ -31,11 +33,20 @@ class ExercisesController < ApplicationController
           # extraer valores del left del pararam positions
           left =  params[:positions][posiciones_keys[k_index].to_sym]
           k_index = k_index + 1
-          # crear elobjeto y agregar atributos
-          input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-          input.update(exercise_id: e.id)
-          p input.save
-          # p Input.last(3)
+
+          # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+          # si inicia con i es input
+          if input[0].chr == "i"
+            # crear elobjeto y agregar atributos
+            input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+          # si inicia con t es texto
+          elsif input[0].chr ==  "t"
+            input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+          end
+
+          input_ob.update(exercise_id: e.id)
+          p input_ob.save
+          p "*" * 50
       end
 
 
@@ -53,6 +64,8 @@ class ExercisesController < ApplicationController
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     @exercises = Exercise.all
     # mostra vista con todos los ejercicios
+    # limpiar variable glob
+    $name_exercise = nil
     render "index_user"
   end
 
