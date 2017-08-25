@@ -102,7 +102,15 @@ class ExercisesController < ApplicationController
   #Acción para mostrar una lista con los usuariosque han resuleto un ejercicio, hace llamada a js
   def users_list
     @exercise = Exercise.find(params[:exercise_id])
+    @name_score = []
     @users_exercise = UserExercise.where(exercise_id: @exercise.id)
+    @users_exercise.each do |round|
+      @name_score << [round.user.name, round.score]
+    end
+    @name_score.sort_by! do |item|
+      item[0]
+    end
+    p @name_score
   end
 
   #Acción para elimiar ejericios (llamada en la página de mis ejercicios)
