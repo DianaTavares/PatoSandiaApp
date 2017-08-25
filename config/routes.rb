@@ -10,22 +10,19 @@ Rails.application.routes.draw do
 
   #ruta que revisa si un ejercicios esta bien o no
   post '/exercises/:exercise_id/solved' => 'exercises#solved', as: 'solved_exercise'
-
-
-<<<<<<< HEAD
   #ruta para mostar los ejercicios de un usuario
   get'/exercises/index_user/' => 'exercises#index_user', as: 'exercises_index_user'
   #ruta para mostrar los ejercicios de todos los usuarios (Comunidad)
   get'/exercises/index/' => 'exercises#index', as: 'exercises_index'
-=======
->>>>>>> controler-bd
+
   #ruta para ir a resolver un ejercicio
   get '/exercises/:exercise_id', to: 'exercises#show', as: 'show_exercise'
   #ruta para eliminar un ejercicio
   get '/exercises/delete/:exercise_id', to: 'exercises#delete', as: 'exercises_delete'
   #ruta para mostrar los usuarios que han resuelto un ejercicio
   get '/exercises/:exercise_id/users_list', to: 'exercises#users_list', as: 'users_exercise_list'
-
+  #Ruta que abre la ventana modal para ingresar el nombre del ejercicio
+  get '/exercises/name', to: 'exercises#modal_name', as: 'exercises_modal_name'
 
   get 'sessions/new'
   get 'user/new'
