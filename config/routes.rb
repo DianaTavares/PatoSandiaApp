@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  #ruta para mostar los ejercicios de un usuario
-  get'/exercises/index_user/:user_id/' => 'exercises#index_user', as: 'index_user_exercises'
 
   post "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise'
   get "/exercise/create_exercise", to: 'exercises#create_exercise', as: 'create_exercise_get'
@@ -10,6 +8,9 @@ Rails.application.routes.draw do
 
   #ruta que revisa si un ejercicios esta bien o no
   post '/exercises/:exercise_id/solved' => 'exercises#solved', as: 'solved_exercise'
+
+
+
   #ruta para mostar los ejercicios de un usuario
   get'/exercises/index_user/' => 'exercises#index_user', as: 'exercises_index_user'
   #ruta para mostrar los ejercicios de todos los usuarios (Comunidad)

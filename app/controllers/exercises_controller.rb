@@ -3,6 +3,8 @@ class ExercisesController < ApplicationController
   def create_exercise
     p "-"* 50
     if params[:authenticity_token]
+      # crear ibjeto para asigar el enercios CAMBIAR
+      e = Exercise.create(user_id: current_user.id, name: "Prueba")
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
@@ -23,11 +25,9 @@ class ExercisesController < ApplicationController
           k_index = k_index + 1
           # crear elobjeto y agregar atributos
           input = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-          # crear ibjeto para asigar el enercios CAMBIAR
-          e = Exercise.create(user_id: current_user.id)
           input.update(exercise_id: e.id)
           p input.save
-          p Input.last(3)
+          # p Input.last(3)
       end
 
 
