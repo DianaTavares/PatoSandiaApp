@@ -1,16 +1,16 @@
 class ExercisesController < ApplicationController
 
   def new
-    p "." * 50
-    p "new ExercisesController"
+    # p "." * 50
+    # p "new ExercisesController"
     # "exercises"=>{"name_exercise"=>"ejer"}
-    p $name_exercise = params[:exercises][:name_exercise]
-    p "." * 50
+    $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
+    # p "." * 50
   end
 
   def create_exercise
     p "-"* 50
-    p "create_exercise"
+    p "CREATE  EXERCISE"
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
       e = Exercise.create(user_id: current_user.id, name: $name_exercise)
@@ -36,6 +36,7 @@ class ExercisesController < ApplicationController
 
           # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
           # si inicia con i es input
+          p input[0]
           if input[0].chr == "i"
             # crear elobjeto y agregar atributos
             input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
