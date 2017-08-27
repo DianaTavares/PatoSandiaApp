@@ -1,0 +1,35 @@
+<h1>edit</h1>
+<div class="">
+  <button id="btn_text" class="btn btn-info">Agregar texto</button>
+  <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
+  <a href="#"><button id="btn_delete" class="btn btn-danger">Borrar area de trabajo</button></a>
+
+</div>
+<%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>
+  <div id="work_area">
+    <% @texts.each_with_index do |text , index| %>
+      <span>ID:<%= text.id %></span><br>
+      <span>LEFT:<%= text.x_position %></span><br>
+      <span>TOP:<%= text.y_position %></span><br>
+      <span>Text:<%= text.text %></span><br>
+      <span id="test"></span>
+      <script type="text/javascript">
+        var $t =  $('#test').append('<label for="exercise_input"><input id="text-db" type= text name="exercise[text]" /></label>').offset({top:(209),left:(1224)});
+
+         $('#work_area').append($t);
+
+      </script>
+    <% end %>
+
+
+
+    <!-- no borrar, util para ver el formato de cada input en los form_for -->
+    <!-- <div class="draggableResizable">
+      %= f.label :input,'I1' %
+      %= f.text_field :input  %
+    </div> -->
+
+  </div>
+  <!-- metodo post -->
+  <%= f.submit "Terminar Ejericio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>
+<% end %>

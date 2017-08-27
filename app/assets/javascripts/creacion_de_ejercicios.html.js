@@ -3,6 +3,10 @@ var $inputN = 0
 var $array = new Array
 var $textN = 0
 $(document).ready(function() {
+  $(document).on('click','#btn_edit', function() {
+
+  });
+
   $(document).on('click','#btn_delete', function() {
     $inputN = 0
     $array = new Array

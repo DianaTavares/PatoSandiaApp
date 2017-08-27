@@ -1,4 +1,13 @@
 class ExercisesController < ApplicationController
+  def edit
+     p "." * 50
+     p "EDIT"
+      exercise_id = params[:exercise_id]
+      @exercise = Exercise.find(exercise_id)
+      @texts = Text.where(exercise_id: @exercise.id)
+      @inputs = Input.where(exercise_id: @exercise.id)
+     p "." * 50
+  end
 
   def new
     # p "." * 50

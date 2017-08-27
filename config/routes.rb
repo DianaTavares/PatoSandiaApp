@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post '/exercises/edit', to: 'exercises#edit_work_place', as: 'edit_work_place'
+  # ruta para ir a editar ejercicio
+  get '/exercises/edit/:exercise_id', to: 'exercises#edit', as: 'exercises_edit'
   #Ruta que abre la ventana modal para ingresar el nombre del ejercicio
   get '/exercises/name', to: 'exercises#modal_name', as: 'exercises_modal_name'
 

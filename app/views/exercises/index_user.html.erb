@@ -19,9 +19,11 @@
           <td><%= link_to exercise.name, show_exercise_path(exercise.id), remote: true %></td>
         <td><%= link_to UserExercise.where(exercise_id: exercise.id).count, users_exercise_list_path(exercise.id), remote: true %></td>
         <td>
-          <button type="button" class="btn btn-success">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
+          <%= link_to exercises_edit_path(exercise.id) do %>
+            <button id="btn_edit" type="button" class="btn btn-success">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          <% end %>
           <%= link_to exercises_delete_path(exercise.id), class: "btn btn-danger", data: { confirm: "¿Seguro que deseas eliminar el ejercicio?" } do %>
             <span class="glyphicon glyphicon-trash"></span>
           <% end %>
