@@ -11,32 +11,36 @@
       <div class="hidden-text-edit">
         <span id="indexT-<%=index + 1%>-edit"><%=index + 1%></span>
         <span id="idT-<%=index + 1%>-edit"><%= text.id %></span>
-        <span id="pxT-<%=index + 1%>-edit"><%= text.x_position %></span>
-        <span id="pyT-<%=index + 1%>-edit"><%= text.y_position %></span>
+        <span id="pxT-<%=index + 1%>-edit"> <%= text.x_position.to_i %> </span>
+        <span id="pyT-<%=index + 1%>-edit"> <%= text.y_position.to_i %> </span>
         <span id="textT-<%=index + 1%>-edit"><%= text.text %></span>
       </div>
 
-      <span id="text_edit_<%=index + 1%>"></span>
+      <span id="text_edit_<%=index + 1%>" class="text_edit_input"></span>
 
       <script type="text/javascript">
-        // apuntar el span donde se coloca el inputText
-        var $text_edit =  $('#text_edit_1');
-        console.log($text_edit);
-        // // obtener el index
-        // var $indexT = $('#indexT-1-edit').html();
-        // // obtener el id
-        // var $idT = $('#idT-1-edit').html();
-        // var $pxT= $('#pxT-1-edit').html();
-        // var $pyT= $('#pyT-1-edit').html();
-        // var $textT= $('#textT-1-edit').html();
 
-        $($text_edit).append('<label for="exercise_input"><input id="text_db" type= text value="sop" name="exercise[text_] " /></label>');
-
-        $($text_edit).offset({top:(209),left:(1224)})
-
-        $('#work_area').append($text_edit);
-
-
+        $.each($(".text_edit_input "), function( indexSpan, span ) {
+            indexSpan++
+            // apuntar el span donde se coloca el inputText
+            var $text_edit =  $('#text_edit_'+indexSpan+'');
+            // obtener el index
+            // var $indexT = $('#indexT-'+indexSpan+'-edit').html();
+            // obtener el id
+            var $idT = $('#idT-'+indexSpan+'-edit').html();
+            //  obtener coordenadas
+            var $pxT= $('#pxT-'+indexSpan+'-edit').html();
+            var $pyT= $('#pyT-'+indexSpan+'-edit').html();
+            //  obtener texto
+            var $textT= $('#textT-'+indexSpan+'-edit').html();
+            //  anexar uno label y su input con el id numerado por cada text, llenar el valor del texto en la caja de texto con lo estraido del la DB,.
+            $($text_edit).append('<label for="exercise_input"><input id="text_edit_'+indexSpan+'" type= text value="'+$textT+" "+indexSpan+'" name="exercise[text_edit_'+indexSpan+']" /></label>');
+            // establecer la ubicación del inputText
+            $($text_edit).offset({top:($pyT),left:($pxT)})
+            // anexar el área de trabajo
+            console.log(indexSpan);
+            //  $('#work_area').append($text_edit);
+        });
       </script>
     <% end %>
 
