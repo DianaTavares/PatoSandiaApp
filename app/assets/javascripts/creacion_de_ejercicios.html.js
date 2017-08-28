@@ -3,7 +3,26 @@ var $inputN = 0
 var $array = new Array
 var $textN = 0
 $(document).ready(function() {
-  $(document).on('click','#btn_edit', function() {
+
+  $(document).on('click','#btn_recover', function() {
+    $.each($(".text_edit_input "), function( indexSpan, span ) {
+        indexSpan++
+        // apuntar el span donde se coloca el inputText
+        var $text_edit =  $('#text_edit_'+indexSpan+'');
+        var $input_edit =  $('#input_edit_'+indexSpan+'');
+        //  obtener coordenadas TEXT
+        var $pxT= $('#pxT-'+indexSpan+'-edit').html();
+        var $pyT= $('#pyT-'+indexSpan+'-edit').html();
+        //  obtener coordenadas INPUT
+        var $pxI= $('#pxI-'+indexSpan+'-edit').html();
+        var $pyI= $('#pyI-'+indexSpan+'-edit').html();
+        // establecer la ubicación del inputText
+        $($text_edit).offset({top:($pyT),left:($pxT)})
+        $($input_edit).offset({top:($pyI),left:($pxI)})
+        // anexar el área de trabajo
+        console.log($text_edit);
+        console.log($input_edit);
+    });
 
   });
 

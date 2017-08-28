@@ -72,7 +72,7 @@ class ExercisesController < ApplicationController
 
     end
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
-    @exercises = Exercise.all.reverse
+    @exercises = Exercise.all
     # mostra vista con todos los ejercicios
     # limpiar variable glob
 

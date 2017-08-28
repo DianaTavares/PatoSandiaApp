@@ -1,50 +1,33 @@
 <h1>edit</h1>
 <div class="">
+  <button id="btn_recover" class="btn btn-info">recuperar ubicacion previa</button>
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
   <a href="#"><button id="btn_delete" class="btn btn-danger">Borrar area de trabajo</button></a>
 
 </div>
+
 <%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>
   <div id="work_area">
     <% @texts.each_with_index do |text , index| %>
       <div class="hidden-text-edit">
-        <span id="indexT-<%=index + 1%>-edit"><%=index + 1%></span>
-        <span id="idT-<%=index + 1%>-edit"><%= text.id %></span>
         <span id="pxT-<%=index + 1%>-edit"> <%= text.x_position.to_i %> </span>
         <span id="pyT-<%=index + 1%>-edit"> <%= text.y_position.to_i %> </span>
-        <span id="textT-<%=index + 1%>-edit"><%= text.text %></span>
       </div>
-
-      <span id="text_edit_<%=index + 1%>" class="text_edit_input"></span>
-
-      <script type="text/javascript">
-
-        $.each($(".text_edit_input "), function( indexSpan, span ) {
-            indexSpan++
-            // apuntar el span donde se coloca el inputText
-            var $text_edit =  $('#text_edit_'+indexSpan+'');
-            // obtener el index
-            // var $indexT = $('#indexT-'+indexSpan+'-edit').html();
-            // obtener el id
-            var $idT = $('#idT-'+indexSpan+'-edit').html();
-            //  obtener coordenadas
-            var $pxT= $('#pxT-'+indexSpan+'-edit').html();
-            var $pyT= $('#pyT-'+indexSpan+'-edit').html();
-            //  obtener texto
-            var $textT= $('#textT-'+indexSpan+'-edit').html();
-            //  anexar uno label y su input con el id numerado por cada text, llenar el valor del texto en la caja de texto con lo estraido del la DB,.
-            $($text_edit).append('<label for="exercise_input"><input id="text_edit_'+indexSpan+'" type= text value="'+$textT+" "+indexSpan+'" name="exercise[text_edit_'+indexSpan+']" /></label>');
-            // establecer la ubicación del inputText
-            $($text_edit).offset({top:($pyT),left:($pxT)})
-            // anexar el área de trabajo
-            console.log(indexSpan);
-            //  $('#work_area').append($text_edit);
-        });
-      </script>
+      <label for="exercise_input">
+        <input id="text_edit_<%=index + 1%>" class="text_edit_input" type=text value="<%= text.text %>" name="exercise[text_edit_<%=index + 1%>]" />
+      </label>
     <% end %>
 
-
+    <% @inputs.each_with_index do |input , index| %>
+      <div class="hidden-text-edit">
+        <span id="pxI-<%=index + 1%>-edit"> <%= input.x_position.to_i %> </span>
+        <span id="pyI-<%=index + 1%>-edit"> <%= input.y_position.to_i %> </span>
+      </div>
+      <label for="exercise_input">
+        <input id="input_edit_<%=index + 1%>" class="text_edit_input" type=text value="<%= input.answer %>" name="exercise[input_edit_<%=index + 1%>]" />
+      </label>
+    <% end %>
 
     <!-- no borrar, util para ver el formato de cada input en los form_for -->
     <!-- <div class="draggableResizable">
