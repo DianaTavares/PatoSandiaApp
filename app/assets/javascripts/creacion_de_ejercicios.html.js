@@ -3,25 +3,40 @@ var $inputN = 0
 var $array = new Array
 var $textN = 0
 $(document).ready(function() {
-
+  // event handler al apretar botono "recuperar ubicaciones "
   $(document).on('click','#btn_recover', function() {
-    $.each($(".text_edit_input "), function( indexSpan, span ) {
-        indexSpan++
+    $.each($(".editables "), function( indexInput, input ) {
+        indexInput++
         // apuntar el span donde se coloca el inputText
-        var $text_edit =  $('#text_edit_'+indexSpan+'');
-        var $input_edit =  $('#input_edit_'+indexSpan+'');
+        var $text_edit =  $('#text_edit_'+indexInput+'');
+        var $input_edit =  $('#input_edit_'+indexInput+'');
         //  obtener coordenadas TEXT
-        var $pxT= $('#pxT-'+indexSpan+'-edit').html();
-        var $pyT= $('#pyT-'+indexSpan+'-edit').html();
+        var $pxT= $('#pxT-'+indexInput+'-edit').html();
+        var $pyT= $('#pyT-'+indexInput+'-edit').html();
+        console.log($pxT);
+        console.log($pyT);
+        console.log(input);
         //  obtener coordenadas INPUT
-        var $pxI= $('#pxI-'+indexSpan+'-edit').html();
-        var $pyI= $('#pyI-'+indexSpan+'-edit').html();
+        var $pxI= $('#pxI-'+indexInput+'-edit').html();
+        var $pyI= $('#pyI-'+indexInput+'-edit').html();
         // establecer la ubicación del inputText
         $($text_edit).offset({top:($pyT),left:($pxT)})
         $($input_edit).offset({top:($pyI),left:($pxI)})
-        // anexar el área de trabajo
-        console.log($text_edit);
-        console.log($input_edit);
+        // establecer atributo clase
+        $($text_edit).attr("class",'editable-text');
+        $($input_edit).attr("class",'editable-input');
+        // hacer draggable los texts
+        $($text_edit).draggable({
+          // manterlo limitado al área de trabajo
+          containment: '#work_area',
+        }).resizable();
+        // hacer dragable los inputs
+        $($input_edit).draggable({
+          // manterlo limitado al área de trabajo
+          containment: '#work_area',
+        }).resizable();
+        // console.log($text_edit);
+        // console.log($input_edit);
     });
 
   });

@@ -1,4 +1,25 @@
-// ocultar los span en la vista de edicion de exercise's 
+.editable-input{
+    width      : 100px;
+    height     : 40px;
+    background : #f0ad4e;
+    color: midnightblue;
+    input{
+      margin-bottom: 0;
+    }
+}
+
+.editable-text{
+  width      : 100px;
+  height     : 40px;
+  background : #5bc0de;
+  color: midnightblue;
+  input{
+    margin-bottom: 0;
+  }
+}
+
+
+// ocultar los span en la vista de edicion de exercise's
 .hidden-text-edit{
   display: none
 }
