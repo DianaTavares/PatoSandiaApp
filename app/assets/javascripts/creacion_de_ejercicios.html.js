@@ -1,6 +1,7 @@
 // variable para agregar a cada input dragable creado
 var $inputN = 0
 var $array = new Array
+var $arrayEdit = new Array
 var $textN = 0
 $(document).ready(function() {
   // event handler al apretar botono "recuperar ubicaciones "
@@ -12,6 +13,8 @@ $(document).ready(function() {
         var $text_edit =  $('#text_edit_'+indexInput+'');
         // si no es indefinido, es decir que sí existe
         if ($text_edit != undefined) {
+          // evitar que el draggable afecte a los demás text
+          $($text_edit).attr("style","position: absolute")
           //  obtener coordenadas TEXT
           var $pxT= $('#pxT-'+indexInput+'-edit').html();
           var $pyT= $('#pyT-'+indexInput+'-edit').html();
@@ -24,11 +27,14 @@ $(document).ready(function() {
             // manterlo limitado al área de trabajo
             containment: '#work_area',
           }).resizable();
+          $arrayEdit.push($text_edit);
         }
         // apuntar al input donde se colocan las respuestas
         var $input_edit =  $('#input_edit_'+indexInput+'');
         // si no existe alguno..
         if ($input_edit != undefined) {
+          // evitar que el draggable afecte a los demás inpus
+          $($input_edit).attr("style","position: absolute")
           //  obtener coordenadas INPUT
           var $pxI= $('#pxI-'+indexInput+'-edit').html();
           var $pyI= $('#pyI-'+indexInput+'-edit').html();
@@ -41,7 +47,7 @@ $(document).ready(function() {
             // manterlo limitado al área de trabajo
             containment: '#work_area',
           }).resizable();
-
+          $arrayEdit.push($input_edit);
         }
 
 
@@ -53,6 +59,7 @@ $(document).ready(function() {
     $inputN = 0
     $array = new Array
     $textN = 0
+    $arrayEdit = new Array
     // alert("delet")
   });
   $(document).on('click','#btn_inputs', function() {
@@ -137,6 +144,19 @@ $(document).on('click','#btn_text', function() {
       $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'_left]" /></label>');
     }
 
+
+    for (var positions = 0; positions < $arrayEdit.length; positions++) {
+      // obtner las cordenadas top y left de cada elemento creado
+      var $topEdit = $arrayEdit[positions].offset().top;
+      var $leftEdit = $arrayEdit[positions].offset().left;
+
+      // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
+      // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
+      var position = positions + 1
+      // anexar  un input de texto al area de trabajo donde el value = cordenadas del elemento, uno para top y otro para left
+      $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="positions_ed[input_edit_'+ position +'_top]" /></label>');
+      $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="positions_ed[input_edit_'+ position +'_left]" /></label>');
+    }
     // alert("fin")
   });
 

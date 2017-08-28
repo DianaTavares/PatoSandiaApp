@@ -23,7 +23,7 @@ editables<h1>edit</h1>
             <!-- Label para los inputs que se enviarn al params -->
             <label for="exercise_input">
               <!-- input de texto, la clase editables sirve para interar en el JS, el value es el contenido de la DB, -->
-              <input  class="editables" type=text value="<%= text.text %>" name="exercise[text_edit_<%=index + 1%>]" />
+              <input  class="editables" type=text value="<%= text.text %>" name="exercise_edit[text_edit_<%=index + 1%>]" />
             </label>
           </div>
 
@@ -38,7 +38,7 @@ editables<h1>edit</h1>
 
       <div id="input_edit_<%=index + 1%>">
         <label for="exercise_input">
-            <input class="editables" type=text value="<%= input.answer %>" name="exercise[input_edit_<%=index + 1%>]" />
+            <input class="editables" type=text value="<%= input.answer %>" name="exercise_edit[input_edit_<%=index + 1%>]" />
         </label>
       </div>
 
