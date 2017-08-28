@@ -6,37 +6,45 @@ $(document).ready(function() {
   // event handler al apretar botono "recuperar ubicaciones "
   $(document).on('click','#btn_recover', function() {
     $.each($(".editables "), function( indexInput, input ) {
+        // el index comenzarlo en 1
         indexInput++
-        // apuntar el span donde se coloca el inputText
+        // apuntar al input donde se coloca el inputText
         var $text_edit =  $('#text_edit_'+indexInput+'');
+        // si no es indefinido, es decir que sí existe
+        if ($text_edit != undefined) {
+          //  obtener coordenadas TEXT
+          var $pxT= $('#pxT-'+indexInput+'-edit').html();
+          var $pyT= $('#pyT-'+indexInput+'-edit').html();
+          // establecer la ubicación del inputText
+          $($text_edit).offset({top:($pyT),left:($pxT)})
+          // establecer atributo clase
+          $($text_edit).attr("class",'editable-text');
+          // hacer draggable los texts
+          $($text_edit).draggable({
+            // manterlo limitado al área de trabajo
+            containment: '#work_area',
+          }).resizable();
+        }
+        // apuntar al input donde se colocan las respuestas
         var $input_edit =  $('#input_edit_'+indexInput+'');
-        //  obtener coordenadas TEXT
-        var $pxT= $('#pxT-'+indexInput+'-edit').html();
-        var $pyT= $('#pyT-'+indexInput+'-edit').html();
-        console.log($pxT);
-        console.log($pyT);
-        console.log(input);
-        //  obtener coordenadas INPUT
-        var $pxI= $('#pxI-'+indexInput+'-edit').html();
-        var $pyI= $('#pyI-'+indexInput+'-edit').html();
-        // establecer la ubicación del inputText
-        $($text_edit).offset({top:($pyT),left:($pxT)})
-        $($input_edit).offset({top:($pyI),left:($pxI)})
-        // establecer atributo clase
-        $($text_edit).attr("class",'editable-text');
-        $($input_edit).attr("class",'editable-input');
-        // hacer draggable los texts
-        $($text_edit).draggable({
-          // manterlo limitado al área de trabajo
-          containment: '#work_area',
-        }).resizable();
-        // hacer dragable los inputs
-        $($input_edit).draggable({
-          // manterlo limitado al área de trabajo
-          containment: '#work_area',
-        }).resizable();
-        // console.log($text_edit);
-        // console.log($input_edit);
+        // si no existe alguno..
+        if ($input_edit != undefined) {
+          //  obtener coordenadas INPUT
+          var $pxI= $('#pxI-'+indexInput+'-edit').html();
+          var $pyI= $('#pyI-'+indexInput+'-edit').html();
+          // colcar en cooordenadas
+          $($input_edit).offset({top:($pyI),left:($pxI)})
+          // agregar clase
+          $($input_edit).attr("class",'editable-input');
+          // hacer dragable los inputs
+          $($input_edit).draggable({
+            // manterlo limitado al área de trabajo
+            containment: '#work_area',
+          }).resizable();
+
+        }
+
+
     });
 
   });

@@ -1,4 +1,5 @@
 .editable-input{
+    position: absolute;
     width      : 100px;
     height     : 40px;
     background : #f0ad4e;
@@ -9,6 +10,7 @@
 }
 
 .editable-text{
+  position: absolute;
   width      : 100px;
   height     : 40px;
   background : #5bc0de;

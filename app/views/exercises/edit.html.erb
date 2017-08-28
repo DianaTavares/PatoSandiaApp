@@ -1,6 +1,6 @@
 editables<h1>edit</h1>
 <div class="">
-  <button id="btn_recover" class="btn btn-success">Recuperar ubicacion previa</button>
+  <button id="btn_recover" class="btn btn-success">Recuperar ubicacion previamente guardada</button>
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
   <a href="#"><button id="btn_delete" class="btn btn-danger">Borrar area de trabajo</button></a>
@@ -18,14 +18,14 @@ editables<h1>edit</h1>
         <span id="pxT-<%=index + 1%>-edit"> <%= text.x_position.to_i %> </span>
         <span id="pyT-<%=index + 1%>-edit"> <%= text.y_position.to_i %> </span>
       </div>
-      <!-- Label para los inputs que se enviarn al params -->
-        <label for="exercise_input">
           <!-- division con un id numerado para cada input que permite mover el input a su ubicación original -->
           <div id="text_edit_<%=index + 1%>">
-            <!-- input de texto, la clase editables sirve para interar en el JS, el value es el contenido de la DB, -->
-            <input  class="editables" type=text value="<%= text.text %>" name="exercise[text_edit_<%=index + 1%>]" />
+            <!-- Label para los inputs que se enviarn al params -->
+            <label for="exercise_input">
+              <!-- input de texto, la clase editables sirve para interar en el JS, el value es el contenido de la DB, -->
+              <input  class="editables" type=text value="<%= text.text %>" name="exercise[text_edit_<%=index + 1%>]" />
+            </label>
           </div>
-        </label>
 
     <% end %>
     <!-- iterar en los inputs -->
@@ -36,11 +36,11 @@ editables<h1>edit</h1>
         <span id="pyI-<%=index + 1%>-edit"> <%= input.y_position.to_i %> </span>
       </div>
 
+      <div id="input_edit_<%=index + 1%>">
         <label for="exercise_input">
-          <div id="input_edit_<%=index + 1%>">
             <input class="editables" type=text value="<%= input.answer %>" name="exercise[input_edit_<%=index + 1%>]" />
-          </div>
         </label>
+      </div>
 
     <% end %>
 
