@@ -110,7 +110,6 @@ class ExercisesController < ApplicationController
         $name_exercise = params[:exercises][:name_exercise]
       end
 
-      p $name_exercise
     end
     # p "." * 50
   end
@@ -121,6 +120,7 @@ class ExercisesController < ApplicationController
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
       e = Exercise.create(user_id: current_user.id, name: $name_exercise)
+      $name_exercise = nil
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
@@ -156,25 +156,12 @@ class ExercisesController < ApplicationController
           p input_ob.save
           p "*" * 50
       end
-
-
-
-      # for new_input in 1..num_of_inputs do
-      #   p "CREATE EXERCISE"
-      #   p params[:exercise]#[:input1]
-      #
-      # end
-
-
-      # Input.new(x_position: params[:positions][:input1_top], y_position: params[:positions][:input1_top], answer: "20")
-
     end
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     @exercises = Exercise.all
     # mostra vista con todos los ejercicios
-    # limpiar variable glob
-
     render "index_user"
+    # limpiar variable glob
   end
 
 

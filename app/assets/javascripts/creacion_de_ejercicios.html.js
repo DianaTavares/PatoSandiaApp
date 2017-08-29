@@ -7,6 +7,12 @@ var $arrayN = -1
 $(document).ready(function() {
   // event handler al apretar botono "recuperar ubicaciones "
   $(document).on('click','#btn_recover', function() {
+    // obtener coordenadas del area de trabajo
+    // variable que afecta el eje Y
+    var $watEd = $("#work_area").offset().top;
+    // variable que afecta el eje X
+    var $walEd =$("#work_area").offset().left;
+
     $.each($(".editables "), function( indexInput, input ) {
         // el index comenzarlo en 1
         indexInput++
@@ -19,6 +25,15 @@ $(document).ready(function() {
           //  obtener coordenadas TEXT
           var $pxT= $('#pxT-'+indexInput+'-edit').html();
           var $pyT= $('#pyT-'+indexInput+'-edit').html();
+          // convertir coordenadas a enteros
+          $pxT = parseInt($pxT);
+          $pyT = parseInt($pyT);
+
+        // intrar el tamaño del area de trabajo a coordenadas
+          // eje X
+          $pxT = $pxT+$walEd;
+          // eje Y
+          $pyT = $pyT+$watEd;
           // establecer la ubicación del inputText
           $($text_edit).offset({top:($pyT),left:($pxT)})
           // establecer atributo clase
@@ -39,6 +54,14 @@ $(document).ready(function() {
           //  obtener coordenadas INPUT
           var $pxI= $('#pxI-'+indexInput+'-edit').html();
           var $pyI= $('#pyI-'+indexInput+'-edit').html();
+          // convertir coordenadas a enteros
+          $pxI = parseInt($pxI);
+          $pyI = parseInt($pyI);
+          // intrar el tamaño del area de trabajo a coordenadas
+
+          $pxI = $pxI+$walEd;
+          $pyI = $pyI+$watEd;
+
           // colcar en cooordenadas
           $($input_edit).offset({top:($pyI),left:($pxI)})
           // agregar clase
@@ -157,19 +180,22 @@ $(document).on('click','#btn_text', function() {
     $array = jQuery.grep($array, function(value) {
       return value != 0;
     });
+    // obtner las posicion left y top del area de trabajo de nuevo ejercicio
+    var $wat = $("#work_area").offset().top;
+    var $wal =$("#work_area").offset().left;
+    console.log($wat);
+    console.log($wal);
     // para elementos NUEVOS a ingresar a la BD
     // desde el 0 hasta el numero de elementos creados en el área de trabajo y empujados
     for (var positions = 0; positions < $array.length; positions++) {
       // obtner las cordenadas top y left de cada elemento creado
       var $top = $array[positions].offset().top;
       var $left = $array[positions].offset().left;
-      // obtner las posicion left y top del area de trabajo de nuevo ejercicio
-      var $wat = $("#work_area").offset().top;
-      var $wal =$("#work_area").offset().left;
+
       // sustraer el top y el left del elemento
       $top = $top-$wat
       $left = $left-$wal
-      
+
       // console.log($array[positions]);
       // console.log("top");
       // console.log($top);
@@ -189,7 +215,9 @@ $(document).on('click','#btn_text', function() {
       // obtner las cordenadas top y left de cada elemento creado
       var $topEdit = $arrayEdit[positions].offset().top;
       var $leftEdit = $arrayEdit[positions].offset().left;
-
+      // sustraer el top y el left del elemento
+      $top = $top-$wat
+      $left = $left-$wal
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
       var position = positions + 1
