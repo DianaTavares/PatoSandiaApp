@@ -2,11 +2,101 @@ class ExercisesController < ApplicationController
 
   def edit_work_place
      p "+" * 50
-     p "EDIT"
-     if params[:authenticity_token]
-       p params
-     end
-     p "+" * 50
+    #  p "EDIT"
+    #  para los nuevos inputs
+      if params[:authenticity_token]
+
+        if params[:exercise] != nil
+          inputs = params[:exercise]
+          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+          posiciones_keys = params[:positions].keys
+          k_index = 0
+          inputs.each_with_index do |input, index|
+            #  p "-" * 50
+            # cada input es un Ary["si es Text o input", "el valor del mismo"]
+            # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+            #  y asignar top
+            top =   params[:positions][posiciones_keys[k_index].to_sym]
+            # sumar uno a la llave del index para buscar el siguiente param
+            k_index = k_index + 1
+            # extraer valores del left del pararam positions
+            left =  params[:positions][posiciones_keys[k_index].to_sym]
+            k_index = k_index + 1
+
+            # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+            # si inicia con i es input
+            if input[0].chr == "i"
+              # crear elobjeto y agregar atributos
+              input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+              # si inicia con t es texto
+            elsif input[0].chr ==  "t"
+              input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+            end
+            input_ob.update(exercise_id: $exercise_id_edit)
+            p input_ob.save
+          end
+        end
+        # para los inputs ya existentes
+        if params[:exercise_edit] != nil
+          inputs = params[:exercise_edit]
+          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+          posiciones_keys = params[:positions_ed].keys
+          k_index = 0
+          inputs.each_with_index do |input, index|
+            #  p "-" * 50
+            # cada input es un Ary["si es Text o input", "el valor del mismo"]
+            # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+            #  y asignar top
+            top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
+            # sumar uno a la llave del index para buscar el siguiente param
+            k_index = k_index + 1
+            # extraer valores del left del pararam positions
+            left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
+            k_index = k_index + 1
+
+            # p "*" * 50
+            # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+            # si inicia con i es input
+            if input[0].chr == "i"
+              p input
+              # params[:exercise_edit_ids_INPUT].values.each do |id_inp|
+              #   p inp.id if inp.id == id_inp.to_i
+              # end
+              Input.where(exercise_id: $exercise_id_edit).each_with_index do |inp, ind|
+                p "-" * 50
+                p inp.id
+                # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+                p "-" * 50
+              end
+              # si inicia con t es texto
+            elsif input[0].chr ==  "t"
+              p input
+              # p 'left'
+              # p left.to_i
+              # p 'top'
+              # p top.to_i
+              Text.where(exercise_id: $exercise_id_edit).each_with_index do |tex,ind|
+                p tex.id
+                #  params[:exercise_edit_ids_TEXT].values.each do |id_text|
+                #    p tex.id if tex.id == id_text.to_i
+                #  end
+                 # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+              end
+            end
+            # input_ob.update(exercise_id: $exercise_id_edit)
+            # p input_ob.save
+          end
+        end
+
+      end
+     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
+    #   @exercises = Exercise.all
+    #  # mostra vista con todos los ejercicios
+    #   render "index_user"
+     #
+    #   # limpiar variable glob
+    #    $exercise_id_edit = nil
+    #  p "+" * 50
   end
 
   def edit
@@ -16,6 +106,7 @@ class ExercisesController < ApplicationController
       @exercise = Exercise.find(exercise_id)
       @texts = Text.where(exercise_id: @exercise.id)
       @inputs = Input.where(exercise_id: @exercise.id)
+      $exercise_id_edit = exercise_id
     #  p "." * 50
   end
 

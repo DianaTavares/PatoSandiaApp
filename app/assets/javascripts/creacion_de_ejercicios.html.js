@@ -149,7 +149,10 @@ $(document).on('click','#btn_text', function() {
       // obtner las cordenadas top y left de cada elemento creado
       var $topEdit = $arrayEdit[positions].offset().top;
       var $leftEdit = $arrayEdit[positions].offset().left;
-
+      console.log("top");
+      console.log($topEdit);
+      console.log("left");
+      console.log($leftEdit);
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
       var position = positions + 1
