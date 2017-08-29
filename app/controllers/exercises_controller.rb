@@ -43,27 +43,30 @@ class ExercisesController < ApplicationController
           posiciones_keys = params[:positions_ed].keys
           k_index = 0
           inputs.each_with_index do |input, index|
-            p "+" * 50
-            
-
             if params[:positions_ed].length > k_index
-              p input
-              p top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
+
+               top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
               # sumar uno a la llave del index para buscar el siguiente param
                k_index = k_index + 1
               # extraer valores del left del pararam positions
-              p left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
+               left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
                 k_index = k_index + 1
-              #  p "-" * 50
-            end
-            # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
-            # si inicia con i es input
-            if input[0].chr == "i"
-              # # crear elobjeto y agregar atributos
-              # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-              # # si inicia con t es texto
-            elsif input[0].chr ==  "t"
-              # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+                # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+                # si inicia con i es input
+                if input[0].chr == "i"
+                  p "-" * 50
+                  p "#INPUT #{input}"
+                  p "TOP: #{top}"
+                  p "LEFT: #{left}"
+                  p "POSICIONS ED:"
+                  p params[:positions_ed]
+                  p "-" * 50
+                  # # crear elobjeto y agregar atributos
+                  # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+                  # # si inicia con t es texto
+                elsif input[0].chr ==  "t"
+                  # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+                end
             end
             # input_ob.update(exercise_id: $exercise_id_edit)
             # p input_ob.save

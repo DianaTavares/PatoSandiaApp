@@ -63,10 +63,10 @@ $(document).ready(function() {
     // alert("delet")
   });
   $(document).on('click','#btn_inputs', function() {
-    console.log($inputN);
+    // console.log($inputN);
     // sumar uno al inputN
     $inputN++
-    console.log($inputN);
+    // console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
     var $element = $('<div class="draggableResizable draggableinput" style="position: absolute; left: 95px; top: 210px"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />input, muevelo</label>');
@@ -84,7 +84,7 @@ $(document).ready(function() {
     //funcion para que el input se ajuste al contenido
     function resizeInput() {
       var valueLength = $(this).prop('value').length;
-      console.log(valueLength);
+      // console.log(valueLength);
       // Para que no arroje error si el input se vacía
       if (valueLength > 0) {
 
@@ -134,7 +134,10 @@ $(document).on('click','#btn_text', function() {
       // obtner las cordenadas top y left de cada elemento creado
       var $top = $array[positions].offset().top;
       var $left = $array[positions].offset().left;
+      console.log($array[positions]);
+      console.log("top");
       console.log($top);
+      console.log("left");
       console.log($left);
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
@@ -149,6 +152,7 @@ $(document).on('click','#btn_text', function() {
       // obtner las cordenadas top y left de cada elemento creado
       var $topEdit = $arrayEdit[positions].offset().top;
       var $leftEdit = $arrayEdit[positions].offset().left;
+      console.log($arrayEdit[positions]);
       console.log("top");
       console.log($topEdit);
       console.log("left");
