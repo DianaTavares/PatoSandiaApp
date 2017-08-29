@@ -99,6 +99,10 @@ class ExercisesController < ApplicationController
     # p "." * 50
     # p "new ExercisesController"
     # "exercises"=>{"name_exercise"=>"ejer"}
+    if  params[:exercises][:name_exercise] == ""
+      flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
+      redirect_to :back
+    end
     $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
     # p "." * 50
   end
@@ -163,7 +167,6 @@ class ExercisesController < ApplicationController
     # limpiar variable glob
 
     render "index_user"
-    $name_exercise = nil
   end
 
 
