@@ -96,7 +96,7 @@ class ExercisesController < ApplicationController
   end
 
   def new
-    # p "." * 50
+    p "." * 50
     # p "new ExercisesController"
     # el authenticity_token existe solo se viene de un formulario
     if params[:authenticity_token]
@@ -108,7 +108,9 @@ class ExercisesController < ApplicationController
       # si el nombre no esta vacio se agrega a variable global, que es posteriormente usada en el boton terminar ejercicio
       if  params[:exercises][:name_exercise] != ""
         $name_exercise = params[:exercises][:name_exercise]
-      end      
+      end
+
+      p $name_exercise
     end
     # p "." * 50
   end

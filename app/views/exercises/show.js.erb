@@ -1,20 +1,31 @@
 $("#exercise-modal").html("<%= escape_javascript(render 'show') %>")
 $("#exercise-modal").modal("show")
+// obtner las posicion left y top del area de trabajo2
+var $wat = $("#work_area2").offset().top;
+var $wal =$("#work_area2").offset().left;
+
 //inicializamos las variables de las posiciones
 var xt = 0
 var yt = 0
 var xi = 0
 var yi = 0
 <% @texts.each do |text| %>
-// estamos restando a la x_position 74 y a la y_position 190 por la diferencia de posiciones entre la creación de ejercicios y el show exercises
-  xt = <%=text.x_position - 68%>
-  yt = <%=text.y_position - 350%>
+// obtener las posciones del x y y de la bd
+  xt = <%=text.x_position %>
+  yt = <%=text.y_position %>
+  // sustraer el top y el left del elemento
+  xt = xt-$wat
+  yt = yt-$wal
   $("#work_area2").append(" <p id='p<%=text.id%>' class='text'><%=text.text%></p>");
   $( "#p<%=text.id%>" ).offset({ top: yt, left: xt});
 <% end %>
 <% @inputs.each do |input| %>
-  xi = <%=input.x_position - 68%>
-  yi = <%=input.y_position - 350%>
+// obtener las posciones del x y y de la bd
+  xi = <%=input.x_position %>
+  yi = <%=input.y_position %>
+  // sustraer el top y el left del elemento
+  xi = xi-$wat
+  yi = yi-$wal
   $("#work_area2").append(" <input type='text' id='<%=input.id%>' class='inputtext' name='<%=input.id%>'>");
   $( "#<%=input.id%>" ).offset({ top: yi, left: xi});
 <% end %>

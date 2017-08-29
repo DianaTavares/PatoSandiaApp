@@ -157,16 +157,25 @@ $(document).on('click','#btn_text', function() {
     $array = jQuery.grep($array, function(value) {
       return value != 0;
     });
+    // para elementos NUEVOS a ingresar a la BD
     // desde el 0 hasta el numero de elementos creados en el área de trabajo y empujados
     for (var positions = 0; positions < $array.length; positions++) {
       // obtner las cordenadas top y left de cada elemento creado
       var $top = $array[positions].offset().top;
       var $left = $array[positions].offset().left;
-      console.log($array[positions]);
-      console.log("top");
-      console.log($top);
-      console.log("left");
-      console.log($left);
+      // obtner las posicion left y top del area de trabajo de nuevo ejercicio
+      var $wat = $("#work_area").offset().top;
+      var $wal =$("#work_area").offset().left;
+      // sustraer el top y el left del elemento
+      $top = $top-$wat
+      $left = $left-$wal
+      
+      // console.log($array[positions]);
+      // console.log("top");
+      // console.log($top);
+      // console.log("left");
+      // console.log($left);
+
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
       var position = positions + 1
@@ -175,16 +184,12 @@ $(document).on('click','#btn_text', function() {
       $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'_left]" /></label>');
     }
 
-
+// para elementos inputs ya existentes en la BD
     for (var positions = 0; positions < $arrayEdit.length; positions++) {
       // obtner las cordenadas top y left de cada elemento creado
       var $topEdit = $arrayEdit[positions].offset().top;
       var $leftEdit = $arrayEdit[positions].offset().left;
-      console.log($arrayEdit[positions]);
-      console.log("top");
-      console.log($topEdit);
-      console.log("left");
-      console.log($leftEdit);
+
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
       var position = positions + 1
