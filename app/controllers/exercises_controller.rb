@@ -98,12 +98,18 @@ class ExercisesController < ApplicationController
   def new
     # p "." * 50
     # p "new ExercisesController"
-    # "exercises"=>{"name_exercise"=>"ejer"}
-    if  params[:exercises][:name_exercise] == ""
-      flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
-      redirect_to :back
+    # el authenticity_token existe solo se viene de un formulario
+    if params[:authenticity_token]
+      # si el nombre del ejercio estáen blanco se pide que se ingrese uno y se redirije al perfil
+      if  params[:exercises][:name_exercise] == ""
+        flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
+        redirect_to :back
+      end
+      # si el nombre no esta vacio se agrega a variable global, que es posteriormente usada en el boton terminar ejercicio
+      if  params[:exercises][:name_exercise] != ""
+        $name_exercise = params[:exercises][:name_exercise]
+      end      
     end
-    $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
     # p "." * 50
   end
 
