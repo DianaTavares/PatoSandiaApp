@@ -7,14 +7,14 @@ var xi = 0
 var yi = 0
 <% @texts.each do |text| %>
 // estamos restando a la x_position 74 y a la y_position 190 por la diferencia de posiciones entre la creación de ejercicios y el show exercises
-  xt = <%=text.x_position - 75%>
-  yt = <%=text.y_position - 200%>
+  xt = <%=text.x_position - 68%>
+  yt = <%=text.y_position - 350%>
   $("#work_area2").append(" <p id='p<%=text.id%>' class='text'><%=text.text%></p>");
   $( "#p<%=text.id%>" ).offset({ top: yt, left: xt});
 <% end %>
 <% @inputs.each do |input| %>
-  xi = <%=input.x_position - 75%>
-  yi = <%=input.y_position - 200%>
+  xi = <%=input.x_position - 68%>
+  yi = <%=input.y_position - 350%>
   $("#work_area2").append(" <input type='text' id='<%=input.id%>' class='inputtext' name='<%=input.id%>'>");
   $( "#<%=input.id%>" ).offset({ top: yi, left: xi});
 <% end %>
