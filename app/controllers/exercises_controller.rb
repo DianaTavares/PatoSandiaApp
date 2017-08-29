@@ -1,12 +1,15 @@
 class ExercisesController < ApplicationController
 
+  def modal_name
+  end
+
   def new
     # p "." * 50
     # p "new ExercisesController"
     # "exercises"=>{"name_exercise"=>"ejer"}
     if  params[:exercises][:name_exercise] == ""
       flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
-      render new
+      redirect_to :back
     end
     $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
     # p "." * 50
@@ -17,7 +20,8 @@ class ExercisesController < ApplicationController
     p "CREATE  EXERCISE"
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
-      e = Exercise.create(user_id: current_user.id, name: $name_exercise)
+      p name_exercise = params[:exercise][:exercise_name]
+      e = Exercise.create(user_id: current_user.id, name: name_exercise)
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
