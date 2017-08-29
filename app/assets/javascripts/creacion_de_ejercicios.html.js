@@ -2,21 +2,24 @@
 var $inputN = 0
 var $array = new Array
 var $textN = 0
+var $arrayN = -1
 $(document).ready(function() {
   $(document).on('click','#btn_delete', function() {
     $inputN = 0
     $array = new Array
     $textN = 0
+    $arrayN = -1
     // alert("delet")
   });
   $(document).on('click','#btn_inputs', function() {
-    console.log($inputN);
+    //console.log($inputN);
     // sumar uno al inputN
     $inputN++
-    console.log($inputN);
+    $arrayN++
+    //console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div class="draggableResizable draggableinput" style="position: absolute; left: 95px; top: 210px"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']" />input, muevelo</label>');
+    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/><p> <a class="close" href="#">x</a> <br> input</p> </label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
@@ -31,7 +34,7 @@ $(document).ready(function() {
     //funcion para que el input se ajuste al contenido
     function resizeInput() {
       var valueLength = $(this).prop('value').length;
-      console.log(valueLength);
+      //console.log(valueLength);
       // Para que no arroje error si el input se vacía
       if (valueLength > 0) {
 
@@ -40,15 +43,28 @@ $(document).ready(function() {
     }
 
     $('#input-'+$inputN+'').on('keyup', resizeInput).each(resizeInput);
+
+    // Funcion para eliminar un elemento, al seleccionar el elemento con clase .close
+    $("#work_area").on("click",".close",function(event){
+        //paramos el envio del link
+        event.preventDefault();
+        //giardamos en la variable delete el div, que es el padre general del elemento .close
+        var deleted = $(this).parent().parent().parent();
+        //lo removemos del DOM
+        deleted.remove();
+        //le asinamos un 0 a su cposicion en el $array (se eliminaran todos los ceros mas adelante)
+        $array[deleted.attr("id")] = 0;
+      });
 });
 
 var $textN = 0
 $(document).on('click','#btn_text', function() {
   // sumar uno al inputN
       $textN++
+      $arrayN++
       // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
       // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-      var $element = $('<div class="draggableResizable draggabletext" style="position: absolute; left: 95px; top: 210px" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />texto, muevelo</label>');
+      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" /><p> <a class="close" href="#">x</a> <br> texto</p></label>');
       // console.log($element);
       $array.push($element);
       //append it to the DOM
@@ -63,7 +79,7 @@ $(document).on('click','#btn_text', function() {
     //esta función se agregó para el el tamaño del input se ajuste al texto
     function resizeInput() {
       var valueLength = $(this).prop('value').length;
-      console.log(valueLength);
+      //console.log(valueLength);
       // Para que no arroje error si el input se vacía
       if (valueLength > 0) {
 
@@ -71,18 +87,31 @@ $(document).on('click','#btn_text', function() {
       }
     }
 
+    //funcion para eliminar textos del área de trabajo
+    $("#work_area").on("click",".close",function(event){
+        event.preventDefault();
+        var deleted = $(this).parent().parent().parent();
+        deleted.remove();
+        $array[deleted.attr("id")] = 0;
+      });
+
+
     $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
 
 });
 
   $(document).on('click','#btn-terminar-ejercicio', function(event) {
+    //elimina todos los ceros (elementos borrados) de $array
+    $array = jQuery.grep($array, function(value) {
+      return value != 0;
+    });
     // desde el 0 hasta el numero de elementos creados en el área de trabajo y empujados
     for (var positions = 0; positions < $array.length; positions++) {
       // obtner las cordenadas top y left de cada elemento creado
       var $top = $array[positions].offset().top;
       var $left = $array[positions].offset().left;
-      console.log($top);
-      console.log($left);
+      //console.log($top);
+      //console.log($left);
       // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
       // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
       var position = positions + 1

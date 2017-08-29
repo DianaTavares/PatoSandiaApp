@@ -4,6 +4,10 @@ class ExercisesController < ApplicationController
     # p "." * 50
     # p "new ExercisesController"
     # "exercises"=>{"name_exercise"=>"ejer"}
+    if  params[:exercises][:name_exercise] == ""
+      flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
+      render new
+    end
     $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
     # p "." * 50
   end

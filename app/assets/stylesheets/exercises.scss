@@ -13,7 +13,7 @@
 #work_area{
   //background-color: aqua;
   //position: absolute;
-  width: 100%;
+  width: 1120px;
   height: 350px;
   border-style: solid;
 
@@ -28,6 +28,9 @@ h3{
   height: 350px;
   // border: 1px solid darkgray;
 
+}
+#btn-terminar-ejercicio{
+  width: 1120px;
 }
 
 .inputdragable{
@@ -45,21 +48,29 @@ h3{
 //estilo para los elementos que se crean en la sección de Creación
 .draggabletext{
     width      : 100px;
-    height     : 40px;
+    height     : 53px;
     background : #5bc0de;
     color: midnightblue;
     input{
       margin-bottom: 0;
+      min-width: 100px;
+    }
+    p{
+      line-height: 1em;
     }
 }
 
 .draggableinput{
     width      : 100px;
-    height     : 40px;
+    height     : 53px;
     background : #f0ad4e;
     color: midnightblue;
     input{
       margin-bottom: 0;
+      min-width: 100px;
+    }
+    p{
+      line-height: 1em;
     }
 }
 
@@ -69,7 +80,13 @@ td, th{
   text-align: center;
 }
 
-.text, .inputtext{
+.text {
+  position: absolute;
+  margin: 0;
+}
+
+.inputtext{
+  position: absolute;
   width: 60px;
   margin: 0;
 }
