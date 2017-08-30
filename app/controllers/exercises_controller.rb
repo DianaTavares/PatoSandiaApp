@@ -33,7 +33,7 @@ class ExercisesController < ApplicationController
               input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
             end
             input_ob.update(exercise_id: $exercise_id_edit)
-            p input_ob.save
+            input_ob.save
           end
         end
         # para los inputs ya existentes
@@ -97,30 +97,32 @@ class ExercisesController < ApplicationController
 
   def new
     p "." * 50
-    # p "new ExercisesController"
+    p "new ExercisesController"
     # el authenticity_token existe solo se viene de un formulario
     if params[:authenticity_token]
       # si el nombre del ejercio estáen blanco se pide que se ingrese uno y se redirije al perfil
       if  params[:exercises][:name_exercise] == ""
         flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
         redirect_to :back
-      end
-      # si el nombre no esta vacio se agrega a variable global, que es posteriormente usada en el boton terminar ejercicio
-      if  params[:exercises][:name_exercise] != ""
+      else
         $name_exercise = params[:exercises][:name_exercise]
       end
+      # si el nombre no esta vacio se agrega a variable global, que es posteriormente usada en el boton terminar ejercicio
 
     end
     # p "." * 50
+    p $name_exercise
   end
 
   def create_exercise
     p "-"* 50
     p "CREATE  EXERCISE"
+    # p $name_exercise
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
+
       e = Exercise.create(user_id: current_user.id, name: $name_exercise)
-      $name_exercise = nil
+      p $name_exercise = nil if e.name == Exercise.last.name
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
@@ -143,7 +145,7 @@ class ExercisesController < ApplicationController
 
           # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
           # si inicia con i es input
-          p input[0]
+          # p input[0]
           if input[0].chr == "i"
             # crear elobjeto y agregar atributos
             input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
@@ -153,8 +155,8 @@ class ExercisesController < ApplicationController
           end
 
           input_ob.update(exercise_id: e.id)
-          p input_ob.save
-          p "*" * 50
+           input_ob.save
+          # p "*" * 50
       end
     end
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
