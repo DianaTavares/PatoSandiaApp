@@ -22,6 +22,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    p "+" * 50
+    p user_params
     if @user.save
       log_in @user
       flash[:success] = "Bienvenido a SiTREC de PatoSandia!"
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation,:status)
     end
 
     # Before filters
