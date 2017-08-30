@@ -81,6 +81,29 @@ $( document ).ready(function() {
     $(this).prop('size', valueLength);
     }}
 
+    //funciones para ambos elementos (respuestas y preguntas )
+    //funcion para eliminar textos del área de trabajo
+    $("#work_area").on("click",".close",function(event){
+        event.preventDefault();
+        //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
+        var deleted = $(this).parent().parent();
+        // variable para distingruir si el elemento es un input, un text o un elemento nuevo
+        var arrayelement = $(this).parent().attr("class");
+        //eliminar el elmento del array correspondiente
+        if (arrayelement == "text"){
+          $arrayText[deleted.attr("id")] = 0;
+          console.log($arrayText);
+        }else if (arrayelement == "input") {
+          $arrayInput[deleted.attr("id")] = 0;
+          console.log($arrayInput);
+        }else if (arrayelement = "new") {
+          $array[deleted.attr("id")] = 0;
+          console.log($array);
+        }
+        //eliminar el elemento del DOM
+        deleted.remove();
+      });
+
     //momento de enviar información al controlador
     $(document).on('click','#btn-terminar-ejercicio', function(event) {
       //eliminar los elementos eliminados del arrayEdit

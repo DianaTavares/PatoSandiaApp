@@ -104,13 +104,7 @@ $(document).on('click','#btn_text', function() {
       }
     }
 
-    //funcion para eliminar textos del área de trabajo
-    $("#work_area").on("click",".close",function(event){
-        event.preventDefault();
-        var deleted = $(this).parent().parent().parent();
-        deleted.remove();
-        $array[deleted.attr("id")] = 0;
-      });
+
 
 
     $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
