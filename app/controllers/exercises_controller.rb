@@ -3,40 +3,12 @@ class ExercisesController < ApplicationController
   def edit_work_place
      p "+" * 50
      p "edit_work_place"
+     #para guardar los id de los elementos editados
+     res_id = []
+     pre_id = []
     #  p "EDIT"
     #  para los nuevos inputs
       if params[:authenticity_token]
-
-        if params[:exercise] != nil
-          inputs = params[:exercise]
-          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-          posiciones_keys = params[:positions].keys
-          k_index = 0
-          inputs.each_with_index do |input, index|
-            #  p "-" * 50
-            # cada input es un Ary["si es Text o input", "el valor del mismo"]
-            # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
-            #  y asignar top
-            top =   params[:positions][posiciones_keys[k_index].to_sym]
-            # sumar uno a la llave del index para buscar el siguiente param
-            k_index = k_index + 1
-            # extraer valores del left del pararam positions
-            left =  params[:positions][posiciones_keys[k_index].to_sym]
-            k_index = k_index + 1
-
-            # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
-            # si inicia con i es input
-            if input[0].chr == "i"
-              # crear elobjeto y agregar atributos
-              input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-              # si inicia con t es texto
-            elsif input[0].chr ==  "t"
-              input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
-            end
-            input_ob.update(exercise_id: $exercise_id_edit)
-            input_ob.save
-          end
-        end
         # para los inputs ya existentes
         # si hay preguntas a editar
         if params[:PREG_ID_ed]
@@ -44,11 +16,13 @@ class ExercisesController < ApplicationController
             params[:PREG_ID_ed].each do |preg|
               # objtener id, content, X y Y,
               id = params[:PREG_ID_ed][preg]
+              #guardamos los id pra revisar los elementos eliminados
+              pre_id << id.to_i
               content = params[:PREG_CONT_ed][preg]
               # top = Y
-              top = params[:PREG_Top_ed][preg]
+              p top = params[:PREG_Top_ed][preg]
               # left = X
-              left = params[:PREG_Left_ed][preg]
+              p left = params[:PREG_Left_ed][preg]
               # encontrar pregunta, cada preunta es un obj Text
               pregunta = Text.find(id)
               # actualizar
@@ -65,6 +39,7 @@ class ExercisesController < ApplicationController
               # cada resp es resp1, resp2, etc
              # obtener ID, content, Y y Y
               id = params[:RESP_ID_ed][resp]
+              res_id << id.to_i
               content = params[:RESP_CONT_ed][resp]
               top = params[:RESP_Top_ed][resp]
               left = params[:RESP_Left_ed][resp]
@@ -76,6 +51,50 @@ class ExercisesController < ApplicationController
               respuesta.save
               # p "-" * 50
             end
+        end
+      end
+      #metodo para elimiar de la base de datos los elementos que se borraron
+      inputs = Input.where(exercise_id: $exercise_id_edit)
+      texts = Text.where(exercise_id: $exercise_id_edit)
+      #comparamos los id de los elementos que tenia el ejercicios y los comparamos con los que quedarn en el area de trabajo, los que no esten se eliminan
+      inputs.each do |input|
+        unless res_id.include?(input.id)
+          input.destroy
+        end
+      end
+      texts.each do |text|
+        unless pre_id.include?(text.id)
+          text.destroy
+        end
+      end
+      if params[:exercise] != nil
+        inputs = params[:exercise]
+        # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+        posiciones_keys = params[:positions].keys
+        k_index = 0
+        inputs.each_with_index do |input, index|
+          #  p "-" * 50
+          # cada input es un Ary["si es Text o input", "el valor del mismo"]
+          # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+          #  y asignar top
+          top =   params[:positions][posiciones_keys[k_index].to_sym]
+          # sumar uno a la llave del index para buscar el siguiente param
+          k_index = k_index + 1
+          # extraer valores del left del pararam positions
+          left =  params[:positions][posiciones_keys[k_index].to_sym]
+          k_index = k_index + 1
+
+          # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+          # si inicia con i es input
+          if input[0].chr == "i"
+            # crear elobjeto y agregar atributos
+            input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+            # si inicia con t es texto
+          elsif input[0].chr ==  "t"
+            input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+          end
+          input_ob.update(exercise_id: $exercise_id_edit)
+          input_ob.save
         end
       end
      # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
