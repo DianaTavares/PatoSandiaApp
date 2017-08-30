@@ -40,34 +40,48 @@ class ExercisesController < ApplicationController
         # para los inputs ya existentes
         # si hay preguntas a editar
         if params[:PREG_ID_ed]
-          p "PREGUNTAS"
+          # iterar el los id, cada preg es preg1, preg2, etc, en
             params[:PREG_ID_ed].each do |preg|
-              p "id: #{params[:PREG_ID_ed][preg]}"
-              p "content: #{params[:PREG_CONT_ed][preg]}"
-              p "top: #{params[:PREG_Top_ed][preg]}"
-              p "left: #{params[:PREG_Left_ed][preg]}"
-              p "-" * 50
+              # objtener id, content, X y Y,
+              id = params[:PREG_ID_ed][preg]
+              content = params[:PREG_CONT_ed][preg]
+              # top = Y
+              top = params[:PREG_Top_ed][preg]
+              # left = X
+              left = params[:PREG_Left_ed][preg]
+              # encontrar pregunta, cada preunta es un obj Text
+              pregunta = Text.find(id)
+              # actualizar
+              pregunta.update(x_position: left, y_position: top, text: content)
+              # salvar
+              pregunta.save
+              # p "-" * 50
             end
         end
         # si hay respuestas
         if params[:RESP_ID_ed]
-          p "RESPUESTAS"
+          # iterar en los idś respuestas
             params[:RESP_ID_ed].each do |resp|
-              p "id: #{params[:RESP_ID_ed][resp]}"
-              p "content: #{params[:RESP_CONT_ed][resp]}"
-              p "top: #{params[:RESP_Top_ed][resp]}"
-              p "left: #{params[:RESP_Left_ed][resp]}"
-              p "-" * 50
+              # cada resp es resp1, resp2, etc
+             # obtener ID, content, Y y Y
+              id = params[:RESP_ID_ed][resp]
+              content = params[:RESP_CONT_ed][resp]
+              top = params[:RESP_Top_ed][resp]
+              left = params[:RESP_Left_ed][resp]
+              # encontrar resp
+              respuesta = Input.find(id)
+              # actualizar
+              respuesta.update(x_position: left, y_position: top, answer: content)
+              # salvar
+              respuesta.save
+              # p "-" * 50
             end
         end
       end
      # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
-    #   @exercises = Exercise.all
-    #  # mostra vista con todos los ejercicios
-    #   render "index_user"
-     #
-    #   # limpiar variable glob
-    #    $exercise_id_edit = nil
+     # mostra vista con todos los ejercicios
+     @exercises = Exercise.where(user_id: current_user.id)
+     render "index_user"
     #  p "+" * 50
   end
 
