@@ -1,4 +1,5 @@
 <% provide(:title, 'Sign up') %>
+<%@stats =["student","teacher"]%>
 <h1>Sign up</h1>
 
 <div class="row">
@@ -18,7 +19,14 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+      <!-- menu dropdown, donde el parametro seleccionado se llama 'flow' y dentro esta el hash "flight_origin"-->
+            <!-- recolectamos todos los vuelos y la opcion seleccionada es el param "flight_origin" -->
+            
+      <%=select(:status, "status_select", @stats.collect {|st|  st  } , {class: 'form-control'} )%>
+
       <%= f.submit "Create my account", class: "btn btn-primary" %>
+
+
     <% end %>
   </div>
 </div>
