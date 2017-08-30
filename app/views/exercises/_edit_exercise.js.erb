@@ -14,14 +14,14 @@ $( document ).ready(function() {
   var $walEd =$("#work_area").offset().left;
   //colocar los text en la view
   <% @texts.each do |text| %>
-    //sumar 1 a los contadores de input y de arrayEditN
+    //sumar 1 a los contadores de input y de array
     $textN++
     $arrayTextN++
     //recuperar info de la base de datos
     //aqui esta guardando 2 hash del params, ejemplo:
     //"PREG_CONT_ed"=>{"preg1"=>"p1", "preg2"=>"p2", "preg3"=>"new_text"},
     //"PREG_ID_ed"=>{"preg1"=>"44", "preg2"=>"45", "preg3"=>"46"},
-    var $element = $('<div id="'+$arrayTextN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="text_edit_value"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="PREG_CONT_ed[preg'+$textN+']" />Texto <a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="PREG_ID_ed[preg'+$textN +']" /></label>');
+    var $element = $('<div id="'+$arrayTextN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="text_edit_value" class="text"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="PREG_CONT_ed[preg'+$textN+']" />Texto <a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="PREG_ID_ed[preg'+$textN +']" /></label>');
     //guardamos el elemento en el arreglo
     $arrayText.push($element);
     //asignación de posiciones
@@ -47,7 +47,7 @@ $( document ).ready(function() {
     // guarda dos hash del params, ejemplo:
     //"RESP_CONT_ed "=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
     //"RESP_ID_ed"=>{"resp1"=>"31", "resp2"=>"32", "resp3"=>"33"},
-    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed [resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
+    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value" class="input"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed [resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
     //guardamos el elemento en el arreglo
     $arrayInput.push($element);
     //asignación de posiciones
@@ -82,11 +82,20 @@ $( document ).ready(function() {
     //funcion para eliminar textos del área de trabajo
     $("#work_area").on("click",".close",function(event){
         event.preventDefault();
+        //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
         var deleted = $(this).parent().parent();
+        // variable para distingruir si el elemento es un input o un text
+        var arrayelement = $(this).parent().attr("class");
+        //eliminar el elmento del array correspondiente
+        if (arrayelement == "text"){
+          $arrayText[deleted.attr("id")] = 0;
+          console.log($arrayText);
+        }else if (arrayelement == "input") {
+          $arrayInput[deleted.attr("id")] = 0;
+          console.log($arrayInput);
+        }
+        //eliminar el elemento del DOM
         deleted.remove();
-        //console.log(deleted.attr("id"));
-        //$arrayEdit[deleted.attr("id")] = 0;
-        //console.log($arrayEdit);
       });
 
 
@@ -120,7 +129,7 @@ $( document ).ready(function() {
         //guardamos con un hash de posicion top de las respuestas y el otro del left, ejemplo
         //"RESP_Top_ed"=>{"resp1"=>"651", "resp2"=>"651", "resp3"=>"450"},
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="RESP_Top_ed[resp'+ position +']" /></label>');
-        //"RESP_Left_ed"=>{"resp1"=>"145.5", "resp2"=>"1159.5", "resp3"=>"396.5"}, 
+        //"RESP_Left_ed"=>{"resp1"=>"145.5", "resp2"=>"1159.5", "resp3"=>"396.5"},
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="RESP_Left_ed[resp'+ position +']" /></label>');
       }
 
