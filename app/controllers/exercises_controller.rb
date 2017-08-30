@@ -120,9 +120,9 @@ class ExercisesController < ApplicationController
     # p $name_exercise
     if params[:authenticity_token]
       # crear ibjeto para asigar el enercios CAMBIAR
+      p $name_exercise
+      p e = Exercise.create(user_id: current_user.id, name: $name_exercise)
 
-      e = Exercise.create(user_id: current_user.id, name: $name_exercise)
-      p $name_exercise = nil if e.name == Exercise.last.name
       #PARAMS: "exercise"=>{"input1"=>"un input"}, "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
       # {"input1_top"=>"377", "input1_left"=>"18"}
       # determinar numero de inputs
@@ -164,6 +164,7 @@ class ExercisesController < ApplicationController
     # mostra vista con todos los ejercicios
     render "index_user"
     # limpiar variable glob
+    p $name_exercise = nil if e.name == Exercise.last.name
   end
 
 
