@@ -177,9 +177,15 @@ class ExercisesController < ApplicationController
 
   #Muestra los ejercicios creados por un solo usuario
   def index_user
-    p user_id = current_user.id
-    p @user = User.find(user_id)
-    p @exercises = Exercise.where(user_id: @user.id)
+    p "*" * 50
+    p "index_user"
+    if current_user.status == "teacher" || current_user.admin?# && !current_user?(user)
+      user_id = current_user.id
+      @user = User.find(user_id)
+      @exercises = Exercise.where(user_id: @user.id)
+    elsif current_user.status == "student"
+      redirect_to(current_user)
+    end
   end
 
   #Muestra un ejercicios para poder sr resuelto
