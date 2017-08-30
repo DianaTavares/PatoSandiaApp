@@ -2,7 +2,8 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-
+#linea para inicializar un archicho js especifico de una view
+Rails.application.config.assets.precompile += %w( edit_exercise.js.erb )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

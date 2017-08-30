@@ -1,0 +1,129 @@
+//contador de los inpus y los text creados
+var $inputEdN = 0
+var $textN = 0
+//array para elementos que ya existian y pueden editarse y su contador
+var $arrayText = new Array
+var $arrayTextN = -1
+var $arrayInput = new Array
+var $arrayInputN = -1
+
+$( document ).ready(function() {
+  // variable que afecta el eje Y
+  var $watEd = $("#work_area").offset().top;
+  // variable que afecta el eje X
+  var $walEd =$("#work_area").offset().left;
+  //colocar los text en la view
+  <% @texts.each do |text| %>
+    //sumar 1 a los contadores de input y de arrayEditN
+    $textN++
+    $arrayTextN++
+    //recuperar info de la base de datos
+    //aqui esta guardando 2 hash del params, ejemplo:
+    //"PREG_CONT_ed"=>{"preg1"=>"p1", "preg2"=>"p2", "preg3"=>"new_text"},
+    //"PREG_ID_ed"=>{"preg1"=>"44", "preg2"=>"45", "preg3"=>"46"},
+    var $element = $('<div id="'+$arrayTextN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="text_edit_value"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="PREG_CONT_ed[preg'+$textN+']" />Texto <a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="PREG_ID_ed[preg'+$textN +']" /></label>');
+    //guardamos el elemento en el arreglo
+    $arrayText.push($element);
+    //asignación de posiciones
+    var $pxT = <%=text.x_position%> + $walEd;
+    var $pyT = <%=text.y_position%> + $watEd;
+    $($element).offset({top:($pyT),left:($pxT)})
+    //se coloca en la vista
+    $("#work_area").append($element);
+    //make it "draggable"
+    $element.draggable({
+      //limitarlo al área de trabajo
+      containment: '#work_area',
+      //permitirle ajustar su tamaño
+    }).resizable();
+    //llamamos a la funcion que adapta el tamaño dle input del element
+    $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
+
+  <% end %>
+  //colocar los inputs en la view
+  <% @inputs.each do |input| %>
+    $inputEdN++
+    $arrayInputN++
+    // guarda dos hash del params, ejemplo:
+    //"RESP_CONT_ed "=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
+    //"RESP_ID_ed"=>{"resp1"=>"31", "resp2"=>"32", "resp3"=>"33"},
+    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed [resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
+    //guardamos el elemento en el arreglo
+    $arrayInput.push($element);
+    //asignación de posiciones
+    console.log($walEd);
+    console.log($watEd);
+    var $pxI = <%=input.x_position%> + $walEd;
+    var $pyI = <%=input.y_position%> + $watEd;
+    $($element).offset({top:($pyI),left:($pxI)})
+    //lo colocamos en la vista
+    $("#work_area").append($element);
+    //lo hacemos draggable
+    $element.draggable({
+      //limitarlo al área de trabajo
+      containment: '#work_area',
+      //permitirle ajustar su tamaño
+    }).resizable();
+    //llamamos a la funcion que adapta el tamaño dle input del element
+    $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
+  <% end %>
+
+  //----> funciones para ambos inputs
+  //funcion que permite que los inputs de adapten al contenido
+  function resizeInput() {
+    var valueLength = $(this).prop('value').length;
+    //console.log(valueLength);
+    // Para que no arroje error si el input se vacía
+    if (valueLength > 0) {
+
+    $(this).prop('size', valueLength);
+    }}
+
+    //funcion para eliminar textos del área de trabajo
+    $("#work_area").on("click",".close",function(event){
+        event.preventDefault();
+        var deleted = $(this).parent().parent();
+        deleted.remove();
+        //console.log(deleted.attr("id"));
+        //$arrayEdit[deleted.attr("id")] = 0;
+        //console.log($arrayEdit);
+      });
+
+
+    //momento de enviar información al controlador
+    $(document).on('click','#btn-terminar-ejercicio', function(event) {
+      //eliminar los elementos eliminados del arrayEdit
+      $arrayText= jQuery.grep($arrayText, function(value) {
+        return value != 0;
+      });
+      $arrayInput= jQuery.grep($arrayInput, function(value) {
+          return value != 0;
+      });
+      <% text_positions=[] %>
+      //recorremos los elementos del arrayText para guardar sus posiciones
+      for (var positions = 0; positions < $arrayText.length; positions++) {
+        //obtener las coordenadas de cada elemento editado
+        var $topEdit = $arrayText[positions].offset().top;
+        var $leftEdit = $arrayText[positions].offset().left;
+        var position = positions + 1
+        //guardamos con un hash de posicion top de las preguntas y el otro del left, ejemplo:
+        //"PREG_Top_ed"=>{"preg1"=>"360", "preg2"=>"360", "preg3"=>"443"},
+        $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="PREG_Top_ed[preg'+ position +']" /></label>');
+        //"PREG_Left_ed"=>{"preg1"=>"145.5", "preg2"=>"1159.5", "preg3"=>"806.5"},
+        $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="PREG_Left_ed[preg'+ position +']" /></label>');
+      }
+      for (var positions = 0; positions < $arrayInput.length; positions++) {
+        //obtener las coordenadas de cada elemento editado
+        var $topEdit = $arrayInput[positions].offset().top;
+        var $leftEdit = $arrayInput[positions].offset().left;
+        var position = positions + 1
+        //guardamos con un hash de posicion top de las respuestas y el otro del left, ejemplo
+        //"RESP_Top_ed"=>{"resp1"=>"651", "resp2"=>"651", "resp3"=>"450"},
+        $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="RESP_Top_ed[resp'+ position +']" /></label>');
+        //"RESP_Left_ed"=>{"resp1"=>"145.5", "resp2"=>"1159.5", "resp3"=>"396.5"}, 
+        $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="RESP_Left_ed[resp'+ position +']" /></label>');
+      }
+
+
+    });
+});
