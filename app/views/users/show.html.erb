@@ -9,17 +9,24 @@
     </section>
   </aside>
   <div class="col-md-2">
+    <!-- EJEMPLO: traido desde _user.html.erb -->
+    <!-- %= link_to "delete", user, method: :delete,
+    data: { confirm: "You sure?" } % -->
     <!-- metodo GET -->
-    <%= link_to image_tag("creacion.png", alt: "creacion logo"), exercises_modal_name_path, remote: true, id: "imagen-creacion", class: "bolitas" %>
-    <p>Creación de Ejercicios</p>
+    <% if current_user.status == "teacher"  %>
+      <%= link_to image_tag("creacion.png", alt: "creacion logo"), exercises_modal_name_path, remote: true, id: "imagen-creacion", class: "bolitas" %>
+      <p>Creación de Ejercicios</p>
+    <% end %>
   </div>
   <div class="col-md-2">
       <%= link_to image_tag("comunidad.png", alt: "comunidad logo"), exercises_index_path, id: "imagen-comunidad", class: "bolitas" %>
       <p>Comunidad</p>
  </div>
   <div class="col-md-2">
-    <%= link_to image_tag("misEjercicios.png", alt: "ejercios logo"), exercises_index_user_path, id: "imagen-mis-ejercicios", class: "bolitas" %>
-    <p>Mis ejercicios</p>
+    <% if current_user.status == "teacher"  %>
+      <%= link_to image_tag("misEjercicios.png", alt: "ejercios logo"), exercises_index_user_path, id: "imagen-mis-ejercicios", class: "bolitas" %>
+      <p>Mis ejercicios</p>
+    <% end %>  
   </div>
 
 </div>
