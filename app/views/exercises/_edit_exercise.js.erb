@@ -45,9 +45,9 @@ $( document ).ready(function() {
     $inputEdN++
     $arrayInputN++
     // guarda dos hash del params, ejemplo:
-    //"RESP_CONT_ed "=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
+    //"RESP_CONT_ed"=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
     //"RESP_ID_ed"=>{"resp1"=>"31", "resp2"=>"32", "resp3"=>"33"},
-    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed [resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
+    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed[resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
     //guardamos el elemento en el arreglo
     $arrayInput.push($element);
     //asignación de posiciones
@@ -106,8 +106,12 @@ $( document ).ready(function() {
         var $topEdit = $arrayText[positions].offset().top;
         var $leftEdit = $arrayText[positions].offset().left;
         var position = positions + 1
+        // extraer el tamaño del area de trabajo
+        $topEdit = $topEdit - $watEd
+        $leftEdit = $leftEdit - $walEd
         //guardamos con un hash de posicion top de las preguntas y el otro del left, ejemplo:
         //"PREG_Top_ed"=>{"preg1"=>"360", "preg2"=>"360", "preg3"=>"443"},
+
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="PREG_Top_ed[preg'+ position +']" /></label>');
         //"PREG_Left_ed"=>{"preg1"=>"145.5", "preg2"=>"1159.5", "preg3"=>"806.5"},
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="PREG_Left_ed[preg'+ position +']" /></label>');
@@ -117,10 +121,13 @@ $( document ).ready(function() {
         var $topEdit = $arrayInput[positions].offset().top;
         var $leftEdit = $arrayInput[positions].offset().left;
         var position = positions + 1
+        // extraer el tamaño del area de trabajo
+        $topEdit = $topEdit - $watEd
+        $leftEdit = $leftEdit - $walEd
         //guardamos con un hash de posicion top de las respuestas y el otro del left, ejemplo
         //"RESP_Top_ed"=>{"resp1"=>"651", "resp2"=>"651", "resp3"=>"450"},
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="RESP_Top_ed[resp'+ position +']" /></label>');
-        //"RESP_Left_ed"=>{"resp1"=>"145.5", "resp2"=>"1159.5", "resp3"=>"396.5"}, 
+        //"RESP_Left_ed"=>{"resp1"=>"145.5", "resp2"=>"1159.5", "resp3"=>"396.5"},
         $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="RESP_Left_ed[resp'+ position +']" /></label>');
       }
 

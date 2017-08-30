@@ -2,6 +2,7 @@ class ExercisesController < ApplicationController
 
   def edit_work_place
      p "+" * 50
+     p "edit_work_place"
     #  p "EDIT"
     #  para los nuevos inputs
       if params[:authenticity_token]
@@ -37,42 +38,28 @@ class ExercisesController < ApplicationController
           end
         end
         # para los inputs ya existentes
-        if params[:exercise_edit] != nil
-          inputs = params[:exercise_edit]
-          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-          posiciones_keys = params[:positions_ed].keys
-          k_index = 0
-          inputs.each_with_index do |input, index|
-            if params[:positions_ed].length > k_index
-
-               top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
-              # sumar uno a la llave del index para buscar el siguiente param
-               k_index = k_index + 1
-              # extraer valores del left del pararam positions
-               left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
-                k_index = k_index + 1
-                # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
-                # si inicia con i es input
-                if input[0].chr == "i"
-                  p "-" * 50
-                  p "#INPUT #{input}"
-                  p "TOP: #{top}"
-                  p "LEFT: #{left}"
-                  p "POSICIONS ED:"
-                  p params[:positions_ed]
-                  p "-" * 50
-                  # # crear elobjeto y agregar atributos
-                  # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-                  # # si inicia con t es texto
-                elsif input[0].chr ==  "t"
-                  # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
-                end
+        # si hay preguntas a editar
+        if params[:PREG_ID_ed]
+          p "PREGUNTAS"
+            params[:PREG_ID_ed].each do |preg|
+              p "id: #{params[:PREG_ID_ed][preg]}"
+              p "content: #{params[:PREG_CONT_ed][preg]}"
+              p "top: #{params[:PREG_Top_ed][preg]}"
+              p "left: #{params[:PREG_Left_ed][preg]}"
+              p "-" * 50
             end
-            # input_ob.update(exercise_id: $exercise_id_edit)
-            # p input_ob.save
-          end
         end
-
+        # si hay respuestas
+        if params[:RESP_ID_ed]
+          p "RESPUESTAS"
+            params[:RESP_ID_ed].each do |resp|
+              p "id: #{params[:RESP_ID_ed][resp]}"
+              p "content: #{params[:RESP_CONT_ed][resp]}"
+              p "top: #{params[:RESP_Top_ed][resp]}"
+              p "left: #{params[:RESP_Left_ed][resp]}"
+              p "-" * 50
+            end
+        end
       end
      # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
     #   @exercises = Exercise.all
