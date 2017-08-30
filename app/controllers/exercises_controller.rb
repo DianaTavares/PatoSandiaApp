@@ -2,86 +2,86 @@ class ExercisesController < ApplicationController
 
   def edit_work_place
      p "+" * 50
-    #  p "EDIT"
+     p params
     #  para los nuevos inputs
-      if params[:authenticity_token]
-
-        if params[:exercise] != nil
-          inputs = params[:exercise]
-          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-          posiciones_keys = params[:positions].keys
-          k_index = 0
-          inputs.each_with_index do |input, index|
-            #  p "-" * 50
-            # cada input es un Ary["si es Text o input", "el valor del mismo"]
-            # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
-            #  y asignar top
-            top =   params[:positions][posiciones_keys[k_index].to_sym]
-            # sumar uno a la llave del index para buscar el siguiente param
-            k_index = k_index + 1
-            # extraer valores del left del pararam positions
-            left =  params[:positions][posiciones_keys[k_index].to_sym]
-            k_index = k_index + 1
-
-            # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
-            # si inicia con i es input
-            if input[0].chr == "i"
-              # crear elobjeto y agregar atributos
-              input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-              # si inicia con t es texto
-            elsif input[0].chr ==  "t"
-              input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
-            end
-            input_ob.update(exercise_id: $exercise_id_edit)
-            p input_ob.save
-          end
-        end
-        # para los inputs ya existentes
-        if params[:exercise_edit] != nil
-          inputs = params[:exercise_edit]
-          # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
-          posiciones_keys = params[:positions_ed].keys
-          k_index = 0
-          inputs.each_with_index do |input, index|
-            if params[:positions_ed].length > k_index
-
-               top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
-              # sumar uno a la llave del index para buscar el siguiente param
-               k_index = k_index + 1
-              # extraer valores del left del pararam positions
-               left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
-                k_index = k_index + 1
-                # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
-                # si inicia con i es input
-                if input[0].chr == "i"
-                  p "-" * 50
-                  p "#INPUT #{input}"
-                  p "TOP: #{top}"
-                  p "LEFT: #{left}"
-                  p "POSICIONS ED:"
-                  p params[:positions_ed]
-                  p "-" * 50
-                  # # crear elobjeto y agregar atributos
-                  # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
-                  # # si inicia con t es texto
-                elsif input[0].chr ==  "t"
-                  # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
-                end
-            end
-            # input_ob.update(exercise_id: $exercise_id_edit)
-            # p input_ob.save
-          end
-        end
-
-      end
-     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
-    #   @exercises = Exercise.all
-    #  # mostra vista con todos los ejercicios
-    #   render "index_user"
-     #
-    #   # limpiar variable glob
-    #    $exercise_id_edit = nil
-    #  p "+" * 50
+    #   if params[:authenticity_token]
+    #
+    #     if params[:exercise] != nil
+    #       inputs = params[:exercise]
+    #       # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+    #       posiciones_keys = params[:positions].keys
+    #       k_index = 0
+    #       inputs.each_with_index do |input, index|
+    #         #  p "-" * 50
+    #         # cada input es un Ary["si es Text o input", "el valor del mismo"]
+    #         # objener el value de cada posicion, a través del Arry posiciones_keys, el cual es convertido en simbolo, ya que es un string en el Array
+    #         #  y asignar top
+    #         top =   params[:positions][posiciones_keys[k_index].to_sym]
+    #         # sumar uno a la llave del index para buscar el siguiente param
+    #         k_index = k_index + 1
+    #         # extraer valores del left del pararam positions
+    #         left =  params[:positions][posiciones_keys[k_index].to_sym]
+    #         k_index = k_index + 1
+    #
+    #         # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+    #         # si inicia con i es input
+    #         if input[0].chr == "i"
+    #           # crear elobjeto y agregar atributos
+    #           input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+    #           # si inicia con t es texto
+    #         elsif input[0].chr ==  "t"
+    #           input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+    #         end
+    #         input_ob.update(exercise_id: $exercise_id_edit)
+    #         p input_ob.save
+    #       end
+    #     end
+    #     # para los inputs ya existentes
+    #     if params[:exercise_edit] != nil
+    #       inputs = params[:exercise_edit]
+    #       # obtener las claves del hash positions=> "positions"=>{"input1_top"=>"377", "input1_left"=>"18"}
+    #       posiciones_keys = params[:positions_ed].keys
+    #       k_index = 0
+    #       inputs.each_with_index do |input, index|
+    #         if params[:positions_ed].length > k_index
+    #
+    #            top =   params[:positions_ed][posiciones_keys[k_index].to_sym]
+    #           # sumar uno a la llave del index para buscar el siguiente param
+    #            k_index = k_index + 1
+    #           # extraer valores del left del pararam positions
+    #            left =  params[:positions_ed][posiciones_keys[k_index].to_sym]
+    #             k_index = k_index + 1
+    #             # determinar si se trata de un un input o un text, cada ary contiene d elementos, el primer es que dice Text o input
+    #             # si inicia con i es input
+    #             if input[0].chr == "i"
+    #               p "-" * 50
+    #               p "#INPUT #{input}"
+    #               p "TOP: #{top}"
+    #               p "LEFT: #{left}"
+    #               p "POSICIONS ED:"
+    #               p params[:positions_ed]
+    #               p "-" * 50
+    #               # # crear elobjeto y agregar atributos
+    #               # input_ob = Input.new(answer: input.last, x_position: left.to_i, y_position: top.to_i)
+    #               # # si inicia con t es texto
+    #             elsif input[0].chr ==  "t"
+    #               # input_ob = Text.new(text: input.last, x_position: left.to_i, y_position: top.to_i)
+    #             end
+    #         end
+    #         # input_ob.update(exercise_id: $exercise_id_edit)
+    #         # p input_ob.save
+    #       end
+    #     end
+    #
+    #   end
+    #  # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
+    # #   @exercises = Exercise.all
+    # #  # mostra vista con todos los ejercicios
+    # #   render "index_user"
+    #  #
+    # #   # limpiar variable glob
+    # #    $exercise_id_edit = nil
+    # #  p "+" * 50
   end
 
   def edit
@@ -100,11 +100,11 @@ class ExercisesController < ApplicationController
     # p "new ExercisesController"
     # "exercises"=>{"name_exercise"=>"ejer"}
     if  params[:exercises][:name_exercise] == ""
-      flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
-      redirect_to :back
+        flash[:danger] = "Tu nuevo ejercicio debe tener un nombre"
+        redirect_to :back
+    else
+      $name_exercise = params[:exercises][:name_exercise]
     end
-    $name_exercise = params[:exercises][:name_exercise] if params[:authenticity_token]
-    # p "." * 50
   end
 
   def create_exercise

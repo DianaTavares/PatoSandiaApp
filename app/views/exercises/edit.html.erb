@@ -5,16 +5,15 @@
 
 <div class="center jumbotron comunidad">
   <h1>Edición de ejercicios</h1>
-  <h3>Nombre del ejercicio: <%= $name_exercise %> </h3>
+  <h3>Nombre del ejercicio: <%= @exercise.name %> </h3>
 </div>
 <div class="">
-  <button id="btn_recover" class="btn btn-success">Recuperar ubicacion previamente guardada</button>
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
 </div>
 <br>
 <!-- formulacio para campo de trabajo editable -->
-<%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>
+<%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea guardar los cambios hechos?" }   do |f| %>
 <!-- division para el area de trabajo -->
   <div id="work_area">
   </div>

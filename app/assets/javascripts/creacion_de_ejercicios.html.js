@@ -13,6 +13,7 @@ $(document).ready(function() {
     $arrayN = -1
     // alert("delet")
   });
+  $inputN = 0
   $(document).on('click','#btn_inputs', function() {
     //console.log($inputN);
     // sumar uno al inputN
@@ -125,23 +126,6 @@ $(document).on('click','#btn_text', function() {
       $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $left +' name="positions[input'+ position +'_left]" /></label>');
     }
 
-
-    for (var positions = 0; positions < $arrayEdit.length; positions++) {
-      // obtner las cordenadas top y left de cada elemento creado
-      var $topEdit = $arrayEdit[positions].offset().top;
-      var $leftEdit = $arrayEdit[positions].offset().left;
-      console.log($arrayEdit[positions]);
-      console.log("top");
-      console.log($topEdit);
-      console.log("left");
-      console.log($leftEdit);
-      // se crea una variable para agregar al nombre el key de cada input, esto es, input1, input2, etc
-      // "positions"=>{"input1-top"=>"377", "input1-left"=>"18"},
-      var position = positions + 1
-      // anexar  un input de texto al area de trabajo donde el value = cordenadas del elemento, uno para top y otro para left
-      $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $topEdit +' name="positions_ed[input_edit_'+ position +'_top]" /></label>');
-      $("#work_area").append('<label for="exercise_input"><input class="input-hide" type=text value='+ $leftEdit +' name="positions_ed[input_edit_'+ position +'_left]" /></label>');
-    }
     // alert("fin")
   });
 
