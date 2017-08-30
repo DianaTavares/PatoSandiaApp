@@ -1,3 +1,4 @@
+//Inpus en la seccion de creación de ejercicios y edición
 .editable-input{
     // position: absolute;
     width      : 100px;
@@ -12,12 +13,16 @@
 .editable-text{
   // position: absolute;
   width      : 100px;
-  height     : 40px;
+  height     : 50px;
   background : #5bc0de;
   color: midnightblue;
   input{
     margin-bottom: 0;
   }
+}
+//link close en los inputs de la seccion de creción  ejercicios
+.close{
+  margin-top: -8px;
 }
 
 .hidde-id-edit{

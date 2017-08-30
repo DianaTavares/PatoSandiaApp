@@ -1,3 +1,8 @@
+<!-- No olvides compilar el archivo en initializers/assers.rb -->
+<script>
+  <%= render :partial => 'exercises/edit_exercise.js', :locals => { :exercise => @exercise } %>
+</script>
+
 <div class="center jumbotron comunidad">
   <h1>Edición de ejercicios</h1>
   <h3>Nombre del ejercicio: <%= $name_exercise %> </h3>
@@ -6,58 +11,12 @@
   <button id="btn_recover" class="btn btn-success">Recuperar ubicacion previamente guardada</button>
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
-  <a href="#"><button id="btn_delete" class="btn btn-danger">Borrar area de trabajo</button></a>
 </div>
 <br>
 <!-- formulacio para campo de trabajo editable -->
 <%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>
 <!-- division para el area de trabajo -->
   <div id="work_area">
-    <!-- iterar en cada uno de los textos que trae el controlador -->
-    <% @texts.each_with_index do |text , index| %>
-    <!-- division oculta en la vista con las posiciones en el DOM guardadas en el BD -->
-      <div class="hidden-text-edit">
-        <!-- posiciones X y Y -->
-        <span id="pxT-<%=index + 1%>-edit"> <%= text.x_position.to_i %> </span>
-        <span id="pyT-<%=index + 1%>-edit"> <%= text.y_position.to_i %> </span>
-      </div>
-          <!-- division con un id numerado para cada input que permite mover el input a su ubicación original -->
-          <div id="text_edit_<%=index + 1%>">
-            <!-- Label para los inputs que se enviarn al params -->
-            <label for="exercise_input">
-              <!-- input de texto, la clase editables sirve para interar en el JS, el value es el contenido de la DB, -->
-              <input  class="editables" type=text value="<%= text.text %>" name="exercise_edit[text_edit_<%=index + 1%>]" />
-
-              <input type=text class="hidde-id-edit" value="<%= text.id %>" name="exercise_edit_ids_TEXT[text_edit_<%=index + 1%>_id]" />
-            </label>
-          </div>
-
-    <% end %>
-    <!-- iterar en los inputs -->
-    <% @inputs.each_with_index do |input , index| %>
-      <!-- clase oculta con las cordenadas de cada clase -->
-      <div class="hidden-text-edit">
-        <span id="pxI-<%=index + 1%>-edit"> <%= input.x_position.to_i %> </span>
-        <span id="pyI-<%=index + 1%>-edit"> <%= input.y_position.to_i %> </span>
-      </div>
-
-      <div id="input_edit_<%=index + 1%>">
-        <label for="exercise_input">
-            <input class="editables" type=text value="<%= input.answer %>" name="exercise_edit[input_edit_<%=index + 1%>]" />
-
-            <input type=text class="hidde-id-edit" value="<%= input.id %>" name="exercise_edit_ids_INPUT[input_edit_<%=index + 1%>_id]" />
-
-        </label>
-      </div>
-
-    <% end %>
-
-    <!-- no borrar, util para ver el formato de cada input en los form_for -->
-    <!-- <div class="draggableResizable">
-      %= f.label :input,'I1' %
-      %= f.text_field :input  %
-    </div> -->
-
   </div>
   <!-- metodo post -->
   <%= f.submit "Terminar Ejericio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>

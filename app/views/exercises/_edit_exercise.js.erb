@@ -1,0 +1,92 @@
+//contador de los inpus y los text creados
+var $inputN = 0
+var $textN = 0
+//array para elementos nuevos y su contado
+var $array = new Array
+var $arrayN = -1
+//array para elementos que ya existian y pueden editarse y su contador
+var $arrayEdit = new Array
+var $arrayEditN = -1
+
+$( document ).ready(function() {
+  //colocar los text en la view
+  <% @texts.each do |text| %>
+    //sumar 1 a los contadores de input y de arrayEditN
+    $textN++
+    $arrayEditN++
+    //recuperar info de la base de datos
+    var $element = $('<div id="'+$arrayEditN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="exercise[text'+$textN+']" />Texto <a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="exercise_edit_ids_TEXT[input_edit_'+$textN +']" /></label>');
+    //guardamos el elemento en el arreglo
+    $arrayEdit.push($element);
+    console.log($arrayEdit);
+    //asignación de posiciones
+    $($element).offset({ top: <%=text.y_position%>, left: <%=text.x_position%>});
+    //se coloca en la vista
+    $("#work_area").append($element);
+    //make it "draggable"
+    $element.draggable({
+      //limitarlo al área de trabajo
+      containment: '#work_area',
+      //permitirle ajustar su tamaño
+    }).resizable();
+    //llamamos a la funcion que adapta el tamaño dle input del element
+    $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
+
+  <% end %>
+  //colocar los inputs en la view
+  <% @inputs.each do |input| %>
+    $inputN++
+    $arrayEditN++
+    var $element = $('<div id="'+$arrayEditN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input_edit"><input id="input-'+$inputN+'" type= text value = "<%= input.answer %>" name="exercise_input_edit[input'+$inputN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="exercise_edit_ids_INPUT[input_edit_'+$inputN +']" /></label>')
+    $($element).offset({ top: <%=input.y_position%>, left: <%=input.x_position%>});
+    //guardamos el elemento en el arreglo
+    $arrayEdit.push($element);
+    console.log($arrayEdit);
+    //lo colocamos en la vista
+    $("#work_area").append($element);
+    //lo hacemos draggable
+    $element.draggable({
+      //limitarlo al área de trabajo
+      containment: '#work_area',
+      //permitirle ajustar su tamaño
+    }).resizable();
+    //llamamos a la funcion que adapta el tamaño dle input del element
+    $('#text-'+$textN+'').on('keyup', resizeInput).each(resizeInput);
+  <% end %>
+
+  //----> funciones para ambos inputs
+  //funcion que permite que los inputs de adapten al contenido
+  function resizeInput() {
+    var valueLength = $(this).prop('value').length;
+    //console.log(valueLength);
+    // Para que no arroje error si el input se vacía
+    if (valueLength > 0) {
+
+    $(this).prop('size', valueLength);
+    }}
+
+    //funcion para eliminar textos del área de trabajo
+    $("#work_area").on("click",".close",function(event){
+        event.preventDefault();
+        var deleted = $(this).parent().parent();
+        deleted.remove();
+        $arrayEdit[deleted.attr("id")] = 0;
+        console.log($arrayEdit);
+      });
+
+    //momento de enviar información al controlador
+    $(document).on('click','#btn-terminar-ejercicio', function(event) {
+      //eliminar los elementos eliminados del arrayEdit
+      $arrayEdit = jQuery.grep($arrayEdit, function(value) {
+        return value != 0;
+      });
+      //recorremos los elementos del arrayEdit
+      for (var positions = 0; positions < $arrayEdit.length; positions++) {
+        //obtener las coordenadas de cada elemento editado
+        var $top = $arrayEdit[positions].offset().top;
+        var $left = $arrayEdit[positions].offset().left;
+      }
+      var position = positions + 1
+
+    });
+});
