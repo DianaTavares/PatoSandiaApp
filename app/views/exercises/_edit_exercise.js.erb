@@ -47,11 +47,9 @@ $( document ).ready(function() {
     // guarda dos hash del params, ejemplo:
     //"RESP_CONT_ed"=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
     //"RESP_ID_ed"=>{"resp1"=>"31", "resp2"=>"32", "resp3"=>"33"},
-<<<<<<< HEAD
-    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed[resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
-=======
-    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value" class="input"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed [resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
->>>>>>> borrarElementosEdit
+
+    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value" class="input"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed[resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
+
     //guardamos el elemento en el arreglo
     $arrayInput.push($element);
     //asignación de posiciones
