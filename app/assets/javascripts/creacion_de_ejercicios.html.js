@@ -21,7 +21,7 @@ $(document).ready(function() {
     //console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/><p> <a class="close" href="#">x</a> <br> input</p> </label>');
+    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input" class="new"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/>Input <a class="close" href="#">x</a> </label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
@@ -46,17 +46,32 @@ $(document).ready(function() {
 
     $('#input-'+$inputN+'').on('keyup', resizeInput).each(resizeInput);
 
-    // Funcion para eliminar un elemento, al seleccionar el elemento con clase .close
-    $("#work_area").on("click",".close",function(event){
-        //paramos el envio del link
-        event.preventDefault();
-        //giardamos en la variable delete el div, que es el padre general del elemento .close
-        var deleted = $(this).parent().parent().parent();
-        //lo removemos del DOM
-        deleted.remove();
-        //le asinamos un 0 a su cposicion en el $array (se eliminaran todos los ceros mas adelante)
-        $array[deleted.attr("id")] = 0;
-      });
+
+      //funcion para eliminar textos del área de trabajo
+      $("#work_area").on("click",".close",function(event){
+          event.preventDefault();
+          //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
+          var deleted = $(this).parent().parent();
+          // variable para distingruir si el elemento es un input, un text o un elemento nuevo
+          var arrayelement = $(this).parent().attr("class");
+          //eliminar el elmento del array correspondiente
+          if (arrayelement == "text"){
+            $arrayText[deleted.attr("id")] = 0;
+            console.log($arrayText);
+          }else if (arrayelement == "input") {
+            $arrayInput[deleted.attr("id")] = 0;
+            console.log($arrayInput);
+          }else if (arrayelement = "new") {
+            $array[deleted.attr("id")] = 0;
+            console.log($array);
+          }
+          //eliminar el elemento del DOM
+          deleted.remove();
+        });
+
+
+
+
 });
 
 var $textN = 0
@@ -66,7 +81,7 @@ $(document).on('click','#btn_text', function() {
       $arrayN++
       // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
       // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" /><p> <a class="close" href="#">x</a> <br> texto</p></label>');
+      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input" class="new"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />Text <a class="close" href="#">x</a> </label>');
       // console.log($element);
       $array.push($element);
       //append it to the DOM
