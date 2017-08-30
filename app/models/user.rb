@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :exercises
   has_many :user_exercises
-  
+
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 50 }
@@ -11,6 +11,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  validates :status , presence: true
 
   # Returns the hash digest of the given string.
   def User.digest(string)

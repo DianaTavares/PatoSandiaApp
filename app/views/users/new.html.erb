@@ -20,7 +20,7 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <!-- label se usa para el texto que acompaña dropdown -->
-      <%= f.label :status, "Rol" %>
+      <%= f.label :status, "Status" %>
       <!-- menu dropdown, donde el parametro seleccionado se llama ':status' y dentro esta el hash "flight_origin"-->
       <!-- se muestran cada uno de los elemetnos del Array stats, hay espacio vacio y la clase le da estilo -->
       <%= f.select(:status, @stats, {include_blank: ''}, { :class => 'form-control' }) %>
