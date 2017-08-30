@@ -160,7 +160,7 @@ class ExercisesController < ApplicationController
       end
     end
     # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
-    @exercises = Exercise.all
+    @exercises = Exercise.where(user_id: current_user.id)
     # mostra vista con todos los ejercicios
     render "index_user"
     # limpiar variable glob
