@@ -21,7 +21,7 @@ $(document).ready(function() {
     //console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input" class="new"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/>Input <a class="close" href="#">x</a> </label>');
+    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input" class="new"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/><a class="close" href="#">x</a> </label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
@@ -81,7 +81,7 @@ $(document).on('click','#btn_text', function() {
       $arrayN++
       // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
       // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input" class="new"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" />Text <a class="close" href="#">x</a> </label>');
+      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input" class="new"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" /><a class="close" href="#">x</a> </label>');
       // console.log($element);
       $array.push($element);
       //append it to the DOM

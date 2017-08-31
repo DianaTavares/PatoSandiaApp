@@ -21,7 +21,7 @@ $( document ).ready(function() {
     //aqui esta guardando 2 hash del params, ejemplo:
     //"PREG_CONT_ed"=>{"preg1"=>"p1", "preg2"=>"p2", "preg3"=>"new_text"},
     //"PREG_ID_ed"=>{"preg1"=>"44", "preg2"=>"45", "preg3"=>"46"},
-    var $element = $('<div id="'+$arrayTextN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="text_edit_value" class="text"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="PREG_CONT_ed[preg'+$textN+']" />Texto <a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="PREG_ID_ed[preg'+$textN +']" /></label>');
+    var $element = $('<div id="'+$arrayTextN+'" class="draggableResizable draggabletext" style="position: absolute"/>').append('<label for="text_edit_value" class="text"><input id="text-'+$textN+'" type= text value = "<%= text.text%>" name="PREG_CONT_ed[preg'+$textN+']" /><a class="close" href="#">x</a><input type=text class="hidde-id-edit" value="<%= text.id %>" name="PREG_ID_ed[preg'+$textN +']" /></label>');
     //guardamos el elemento en el arreglo
     $arrayText.push($element);
     //asignación de posiciones
@@ -48,7 +48,7 @@ $( document ).ready(function() {
     //"RESP_CONT_ed"=>{"resp1"=>"r1", "resp2"=>"r2", "resp3"=>"new_input"},
     //"RESP_ID_ed"=>{"resp1"=>"31", "resp2"=>"32", "resp3"=>"33"},
 
-    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value" class="input"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed[resp'+$inputEdN+']"/>Input <a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
+    var $element = $('<div id="'+$arrayInputN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="input_edit_value" class="input"><input id="input-'+$inputEdN+'" type= text value = "<%= input.answer %>" name="RESP_CONT_ed[resp'+$inputEdN+']"/><a class="close" href="#">x</a> <input type=text class="hidde-id-edit" value="<%= input.id %>" name="RESP_ID_ed[resp'+$inputEdN +']" /></label>')
 
     //guardamos el elemento en el arreglo
     $arrayInput.push($element);
