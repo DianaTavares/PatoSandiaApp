@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :exercises
-  has_many :user_exercises
+  has_many :exercises,  dependent: :delete_all
+  has_many :user_exercises,  dependent: :delete_all
 
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
