@@ -11,7 +11,7 @@
 <div class="buttons-edit">
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
-  <%= button_to "Cambiar Nombre", edit_name_path(@exercise.id),class: "btn btn-success",id: "btn_change_name" ,remote: true %>
+  <%= button_to "Cambiar Nombre", edit_name_path(@exercise.id),class: "btn btn-success",id: "btn_change_name" ,remote: true %>  
 </div>
 <!-- formulacio para campo de trabajo editable -->
 <%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>

@@ -1,22 +1,28 @@
 class ExercisesController < ApplicationController
-
+  # metodo despues de ingresar en el formulario dnuevo nombre
   def update_name
     p "-" * 50
-    p "update_name"
-    p @new_name = params[:name][:new_name_exercise]
+    p "update_name"    
+    $new_name_exercise = params[:name][:new_name_exercise]
+    p "+" * 50
+    case $new_name_exercise
+      when "" then $new_name_exercise = nil
+      else
+        p "tiene contenido"
+    end
     # p @name_exercise_id = params[:format]
     # redirect_to edit_work_place_path(@name_exercise_id)
   end
 
-
+  # metodo de vista modal para ingresar nuevo nombre
   def edit_name
-    p "-"* 50
-    p "edit name"
+    # p "-"* 50
+    # p "edit name"
     # @name_exercise_id = params[:format]
   end
 
   def edit_work_place
-    #  p "+" * 50
+     p "+" * 50
     #  p "edit_work_place"
      #para guardar los id de los elementos editados
      res_id = []
@@ -35,9 +41,9 @@ class ExercisesController < ApplicationController
               pre_id << id.to_i
               content = params[:PREG_CONT_ed][preg]
               # top = Y
-              p top = params[:PREG_Top_ed][preg]
+               top = params[:PREG_Top_ed][preg]
               # left = X
-              p left = params[:PREG_Left_ed][preg]
+               left = params[:PREG_Left_ed][preg]
               # encontrar pregunta, cada preunta es un obj Text
               pregunta = Text.find(id)
               # actualizar
@@ -111,6 +117,13 @@ class ExercisesController < ApplicationController
           input_ob.update(exercise_id: $exercise_id_edit)
           input_ob.save
         end
+      end
+      if  $new_name_exercise != nil
+        p "-" * 50
+        p "nuevo nombre no es NIl"
+        p Exercise.find($exercise_id_edit).update(name:$new_name_exercise)
+        $new_name_exercise = nil
+        p "-" * 50
       end
      # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
      # mostra vista con todos los ejercicios
@@ -199,7 +212,7 @@ class ExercisesController < ApplicationController
     # mostra vista con todos los ejercicios
     render "index_user"
     # limpiar variable glob
-    p $name_exercise = nil if e.name == Exercise.last.name
+     $name_exercise = nil if e.name == Exercise.last.name
   end
 
 
