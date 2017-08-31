@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post '/exercises/edit/name', to: 'exercises#edit_name', as: 'edit_name'
+
   post '/exercises/edit', to: 'exercises#edit_work_place', as: 'edit_work_place'
   # ruta para ir a editar ejercicio
   get '/exercises/edit/:exercise_id', to: 'exercises#edit', as: 'exercises_edit'

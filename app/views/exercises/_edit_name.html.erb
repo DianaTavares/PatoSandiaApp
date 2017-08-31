@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Ingresa el Nombre de tu nuevo Ejercicio</h3>
+    </div>
+    <%= form_for :name, url: edit_name_path do |f| %>
+      <div class="modal-body">
+          <%= f.label :name_exercise,'' %>
+          <%= f.text_field :name_exercise  %>
+        </div>
+        <div class="modal-footer">
+      <%= f.submit "Cambiar nombre!", class: "btn btn-success revisar" %>
+      <button type="button" class="btn btn-block btn-danger boton_cerrar" data-dismiss="modal">Cerrar</button>
+    </div>
+  <% end %>
+  </div>
+</div>

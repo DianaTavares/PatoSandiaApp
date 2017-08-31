@@ -7,9 +7,11 @@
  <h1>Edición de ejercicios</h1>
  <h3>Nombre del ejercicio: <%= @exercise.name %> </h3>
 </div>
+
 <div class="">
   <button id="btn_text" class="btn btn-info">Agregar texto</button>
   <button id="btn_inputs" class="btn btn-warning">Agregar input</button>
+  <%= button_to "Cambiar Nombre", edit_name_path(@exercise.id),class: "btn btn-success", remote: true %>
 </div>
 <!-- formulacio para campo de trabajo editable -->
 <%= form_for :exercise, url: edit_work_place_path, data: { confirm: "¿desea salvar el ejercicio" }   do |f| %>
@@ -19,3 +21,5 @@
   <!-- metodo post -->
   <%= f.submit "Terminar Ejericio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>
 <% end %>
+
+<div id="edit-name-modal" class="modal fade"></div>
