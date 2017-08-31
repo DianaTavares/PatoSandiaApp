@@ -48,8 +48,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "Usuario eliminado"
+    user = User.find(params[:id])
+    #con la dependencia de la eliminacion del os hijos, eliminado el ejercicio, se eliminan textos e inputs
+    exercises = Exercise.where(user_id: user.id)
+    exercises.each do |exercise|
+      exercise.destroy
+    end
+    #elimina ejercicios y user_exercises
+    user.destroy
+    flash[:success] = "Usuario y todas sus dependencias se han eliminado"
     redirect_to users_url
   end
 

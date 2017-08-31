@@ -281,7 +281,7 @@ class ExercisesController < ApplicationController
 
   #Acción para elimiar ejericios (llamada en la página de mis ejercicios)
   def delete
-    Exercise.find(params[:exercise_id]).destroy
+    Exercise.find(params[:exercise_id]).destroy_all
     # Eliminamos todo lo relacionado a ese ejericio
     texts = Text.where(exercise_id: params[:exercise_id])
     inputs = Input.where(exercise_id: params[:exercise_id])
