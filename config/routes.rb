@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post '/exercises/update/name', to: 'exercises#update_name', as: 'update_name'
+
+  # ruta para vista modal para Cambiar nombre
   post '/exercises/edit/name', to: 'exercises#edit_name', as: 'edit_name'
 
   post '/exercises/edit', to: 'exercises#edit_work_place', as: 'edit_work_place'

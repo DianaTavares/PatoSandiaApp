@@ -1,8 +1,23 @@
 class ExercisesController < ApplicationController
 
+  def update_name
+    p "-" * 50
+    p "update_name"
+    p @new_name = params[:name][:new_name_exercise]
+    # p @name_exercise_id = params[:format]
+    # redirect_to edit_work_place_path(@name_exercise_id)
+  end
+
+
+  def edit_name
+    p "-"* 50
+    p "edit name"
+    # @name_exercise_id = params[:format]
+  end
+
   def edit_work_place
-     p "+" * 50
-     p "edit_work_place"
+    #  p "+" * 50
+    #  p "edit_work_place"
      #para guardar los id de los elementos editados
      res_id = []
      pre_id = []
