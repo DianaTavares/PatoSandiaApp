@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # con dependent: :delete_all al elminar el usuario se elminaran sus ejercisios y las tablas de union UserExercise
+  # http://guides.rubyonrails.org/association_basics.html
   has_many :exercises,  dependent: :delete_all
   has_many :user_exercises,  dependent: :delete_all
 
