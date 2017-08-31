@@ -48,7 +48,28 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    p "-" * 50
+    p "destroy USER"
+    u = User.find(params[:id])#.destroy
+    ejs = u.exercises
+    # p ejs.count
+    ejs.each do |e|
+      texts = Text.where(exercise_id: e.id)
+      inputs = Input.where(exercise_id: e.id)
+      texts.each do |text|
+        p "-" * 10
+        p text.destroy
+      end
+      inputs.each do |input|
+        p "-" * 10
+        p input.destroy
+      end
+      p "-" * 10
+      p e.destroy
+    end
+    p "-" * 10
+    p u.destroy
+
     flash[:success] = "Usuario eliminado"
     redirect_to users_url
   end
