@@ -1,14 +1,13 @@
 class ExercisesController < ApplicationController
   # metodo despues de ingresar en el formulario dnuevo nombre
   def update_name
-    p "-" * 50
-    p "update_name"    
+    #  obtener el nuevo nombre de la vista modal cambiar nombre
     $new_name_exercise = params[:name][:new_name_exercise]
-    p "+" * 50
     case $new_name_exercise
+      # en caso de el parametro sea u string vacio, hacerlo nil, para no modificar
       when "" then $new_name_exercise = nil
       else
-        p "tiene contenido"
+        # p "tiene contenido"
     end
     # p @name_exercise_id = params[:format]
     # redirect_to edit_work_place_path(@name_exercise_id)
@@ -118,18 +117,20 @@ class ExercisesController < ApplicationController
           input_ob.save
         end
       end
+      # si se ingreso un nombre que no es un string vacio, se entra en la condicion
       if  $new_name_exercise != nil
-        p "-" * 50
-        p "nuevo nombre no es NIl"
-        p Exercise.find($exercise_id_edit).update(name:$new_name_exercise)
+        # encontrar el ejercisio, que y actualiza el nombre
+        Exercise.find($exercise_id_edit).update(name:$new_name_exercise)
+        # limpiar la variable
         $new_name_exercise = nil
-        p "-" * 50
       end
      # en la vista posterior a dar click en "terminar ejercicio" se muestran todos lo ejerccios, por ello se crea
      # mostra vista con todos los ejercicios
      @exercises = Exercise.where(user_id: current_user.id)
      render "index_user"
     #  p "+" * 50
+    # limpiar variable
+    $exercise_id_edit = nil
   end
 
   def edit
