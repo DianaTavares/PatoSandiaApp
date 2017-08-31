@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
+  # destruir user y sus ejercisios, inputs y texts
   def destroy
     p "-" * 50
     p "destroy USER"
@@ -57,18 +57,18 @@ class UsersController < ApplicationController
       texts = Text.where(exercise_id: e.id)
       inputs = Input.where(exercise_id: e.id)
       texts.each do |text|
-        p "-" * 10
-        p text.destroy
+        # p "-" * 10
+         text.destroy
       end
       inputs.each do |input|
-        p "-" * 10
-        p input.destroy
+        # p "-" * 10
+         input.destroy
       end
-      p "-" * 10
-      p e.destroy
+      # p "-" * 10
+       e.destroy
     end
-    p "-" * 10
-    p u.destroy
+    # p "-" * 10
+     u.destroy
 
     flash[:success] = "Usuario eliminado"
     redirect_to users_url
