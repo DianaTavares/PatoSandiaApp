@@ -1,5 +1,4 @@
 .close{
-  float: left;
   margin-top: -5px;
 }
 
@@ -58,26 +57,31 @@ h3{
   margin-top: -50px;
 }
 //estilo para los elementos que se crean en la sección de Creación
-.draggabletext{
+.draggableinput{
     width      : 40px;
-    height     : 38px;
-    background : #5bc0de;
+    height     : 28px;
     color: midnightblue;
+    background : #f0ad4e;
     input{
       margin-bottom: 0;
-      min-width: 10px;
+      font-size: 17px;
+
     }
 }
 
-.draggableinput{
-    width      : 40px;
-    height     : 38px;
-    background : #f0ad4e;
-    color: midnightblue;
-    input{
-      margin-bottom: 0;
-    }
+.draggabletext{
+  width      : 40px;
+  height     : 28px;
+  color: midnightblue;
+  background : #5bc0de;
+  input{
+    margin-bottom: 0;
+    font-size: 17px;
+
+  }
 }
+
+
 
 
 

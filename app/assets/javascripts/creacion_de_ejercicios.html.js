@@ -21,17 +21,17 @@ $(document).ready(function() {
     //console.log($inputN);
     // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
     // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<label for="exercise_input" class="new"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/><a class="close" href="#">x</a> </label>');
+    //se agrego un div con class fro_input, para que permitiera tener el <a> de cerrar a la derecha del imput
+    var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggableinput" style="position: absolute"/>').append('<a class="close" href="#">x</a><label for="exercise_input" class="new"><input id="input-'+$inputN+'" type= text name="exercise[input'+$inputN+']"/></label>');
     // console.log($element);
     $array.push($element);
     //append it to the DOM
     $("#work_area").append($element);
-
     //make it "draggable" and "resizable"
     $element.draggable({
       // manterlo limitado al área de trabajo
       containment: '#work_area',
-    }).resizable();
+    });
     // });
     //funcion para que el input se ajuste al contenido
     function resizeInput() {
@@ -41,19 +41,27 @@ $(document).ready(function() {
       if (valueLength > 0) {
 
       $(this).prop('size', valueLength);
+      // adapta al div al tamaño del input, guardando el tamaño del input y asignandoselo al input + 25
+      var a = $('#input-'+$inputN+'').width();
+      console.log(a);
+      $('.for_input').width(a);
+      console.log($('.for_input').width());
+      var c = $('#'+$arrayN+'').width(a + 25);
+      console.log(c);
       }
     }
-
     $('#input-'+$inputN+'').on('keyup', resizeInput).each(resizeInput);
+
 
 
       //funcion para eliminar textos del área de trabajo
       $("#work_area").on("click",".close",function(event){
           event.preventDefault();
           //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
-          var deleted = $(this).parent().parent();
+          var deleted = $(this).parent();
           // variable para distingruir si el elemento es un input, un text o un elemento nuevo
           var arrayelement = $(this).parent().attr("class");
+          console.log(arrayelement);
           //eliminar el elmento del array correspondiente
           if (arrayelement == "text"){
             $arrayText[deleted.attr("id")] = 0;
@@ -81,7 +89,7 @@ $(document).on('click','#btn_text', function() {
       $arrayN++
       // console.log("en creacion_de_ejercicios.html.js se ha dado click al boton con id #btn_inputs");
       // asignar al un div draggableResizable y anexarle un label  y name para que el botón "terminar trabajo" envíe los datos al params
-      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<label for="exercise_input" class="new"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" /><a class="close" href="#">x</a> </label>');
+      var $element = $('<div id="'+$arrayN+'" class="draggableResizable draggabletext" style="position: absolute" />').append('<a class="close" href="#">x</a><label for="exercise_input" class="new"><input id="text-'+$textN+'" type= text name="exercise[text'+$textN+']" /></label>');
       // console.log($element);
       $array.push($element);
       //append it to the DOM
@@ -91,7 +99,7 @@ $(document).on('click','#btn_text', function() {
     $element.draggable({
       // manterlo limitado al área de trabajo
       containment: '#work_area',
-    }).resizable();
+    });
     // });
     //esta función se agregó para el el tamaño del input se ajuste al texto
     function resizeInput() {
@@ -99,8 +107,9 @@ $(document).on('click','#btn_text', function() {
       //console.log(valueLength);
       // Para que no arroje error si el input se vacía
       if (valueLength > 0) {
-
       $(this).prop('size', valueLength);
+      var b = $('#text-'+$textN+'').width();
+      $('#'+$arrayN+'').width(b + 25);
       }
     }
 
