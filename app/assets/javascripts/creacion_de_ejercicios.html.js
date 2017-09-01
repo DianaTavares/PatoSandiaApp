@@ -46,33 +46,30 @@ $(document).ready(function() {
 
     $('#input-'+$inputN+'').on('keyup', resizeInput).each(resizeInput);
 
-
-      //funcion para eliminar textos del área de trabajo
-      $("#work_area").on("click",".close",function(event){
-          event.preventDefault();
-          //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
-          var deleted = $(this).parent().parent();
-          // variable para distingruir si el elemento es un input, un text o un elemento nuevo
-          var arrayelement = $(this).parent().attr("class");
-          //eliminar el elmento del array correspondiente
-          if (arrayelement == "text"){
-            $arrayText[deleted.attr("id")] = 0;
-            console.log($arrayText);
-          }else if (arrayelement == "input") {
-            $arrayInput[deleted.attr("id")] = 0;
-            console.log($arrayInput);
-          }else if (arrayelement = "new") {
-            $array[deleted.attr("id")] = 0;
-            console.log($array);
-          }
-          //eliminar el elemento del DOM
-          deleted.remove();
-        });
-
-
-
-
 });
+
+//funcion para eliminar textos del área de trabajo
+$("#work_area").on("click",".close",function(event){
+    event.preventDefault();
+    //guardamos en deleted el elemento a eliminar con sus parent correspodientes (label y div)
+    var deleted = $(this).parent().parent();
+    // variable para distingruir si el elemento es un input, un text o un elemento nuevo
+    var arrayelement = $(this).parent().attr("class");
+    //eliminar el elmento del array correspondiente
+    if (arrayelement == "text"){
+      $arrayText[deleted.attr("id")] = 0;
+      console.log($arrayText);
+    }else if (arrayelement == "input") {
+      $arrayInput[deleted.attr("id")] = 0;
+      console.log($arrayInput);
+    }else if (arrayelement = "new") {
+      $array[deleted.attr("id")] = 0;
+      console.log($array);
+    }
+    //eliminar el elemento del DOM
+    deleted.remove();
+  });
+
 
 var $textN = 0
 $(document).on('click','#btn_text', function() {
