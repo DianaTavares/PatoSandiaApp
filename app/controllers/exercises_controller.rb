@@ -130,7 +130,7 @@ class ExercisesController < ApplicationController
      render "index_user"
     #  p "+" * 50
     # limpiar variable
-    $exercise_id_edit = nil
+    # $exercise_id_edit = nil
   end
 
   def edit
@@ -213,7 +213,7 @@ class ExercisesController < ApplicationController
     # mostra vista con todos los ejercicios
     render "index_user"
     # limpiar variable glob
-     $name_exercise = nil if e.name == Exercise.last.name
+    #  $name_exercise = nil if e.name == Exercise.last.name
   end
 
 
@@ -234,6 +234,7 @@ class ExercisesController < ApplicationController
     elsif current_user.status == "student"
       redirect_to(current_user)
     end
+    
   end
 
   #Muestra un ejercicios para poder sr resuelto
