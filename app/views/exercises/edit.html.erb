@@ -6,6 +6,17 @@
 <div class="center jumbotron comunidad">
  <h1>Edición de ejercicios</h1>
  <h3>Nombre del ejercicio: <%= @exercise.name %> </h3>
+ <div class="instrucciones">
+   <h2 class="instrucciones">Instrucciones</h2>
+   <ul>
+     <li>agrega preguntas o respuestas, con los botones correspondientes</li>
+     <li>arrastra lo creado al lugar deseado en el área cuadriculada de trabajo</li>
+     <li>elimina una pregunta o una respuesta, dando click en el tache correspondiente</li>
+     <li>presiona "Cambiar Nombre", si deseas modificar el nombre del ejercicio, si no ingresas un nuevo nombre, el nombre permanecerá intacto</li>
+     <li>presiona "Modificar ejercicio"</li>
+   </ul>
+
+ </div>
 </div>
 
 <div class="buttons-edit">
@@ -19,7 +30,7 @@
   <div id="work_area">
   </div>
   <!-- metodo post -->
-  <%= f.submit "Terminar Ejercicio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>
+  <%= f.submit "Modificar Ejercicio", class: "btn btn-primary", id:"btn-terminar-ejercicio" %>
 <% end %>
 
 <div id="edit-name-modal" class="modal fade"></div>
