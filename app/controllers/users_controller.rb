@@ -53,24 +53,42 @@ class UsersController < ApplicationController
     u = User.find(params[:id])#.destroy
     ejs = u.exercises
     # p ejs.count
-    ejs.each do |e|
-      texts = Text.where(exercise_id: e.id)
-      inputs = Input.where(exercise_id: e.id)
-      texts.each do |text|
-        # p "-" * 10
-         text.destroy
-      end
-      inputs.each do |input|
-        # p "-" * 10
-         input.destroy
-      end
+    if ejs
+      ejs.each do |e|
+        texts = Text.where(exercise_id: e.id)
+        inputs = Input.where(exercise_id: e.id)
+        user_exercise_e = UserExercise.where(exercise_id: e.id)
+        user_exercise_u = UserExercise.where(user_id: u.id)
+        if texts
+          texts.each do |text|
+            # p "-" * 10
+            text.destroy
+          end
+        end
+        if inputs
+          inputs.each do |input|
+            # p "-" * 10
+            input.destroy
+          end
+        end
+        if user_exercise_e
+          user_exercise_e.each do |u_e_e|
+            u_e_e.destroy
+          end
+        end
+        if user_exercise_u
+          user_exercise_u.each do |u_e_u|
+            u_e_u.destroy
+          end
+        end
       # p "-" * 10
-       e.destroy
+        e.destroy
+      end
     end
     # p "-" * 10
      u.destroy
 
-    flash[:success] = "Usuario eliminado"
+    flash[:success] = "Usuario y todas sus relaciones eliminado"
     redirect_to users_url
   end
 
