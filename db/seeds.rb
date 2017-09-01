@@ -4,7 +4,7 @@ admin = User.create!(name:  "Administrador",
              password_confirmation: "foobar",
              admin: true,
              status: "teacher")
-student = User.create!(name:  "Estudainte Manolito",
+student = User.create!(name:  "Estudiante Manolito",
              email: "example@student.org",
              password:              "foobar",
              password_confirmation: "foobar",
